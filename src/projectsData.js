@@ -1,41 +1,54 @@
 // src/projectsData.js
 const projectsData = [
   {
+    title: 'Sigerisata',
+    description: 'A tourism application that help tourist in Lampung province to find and choose their destination based on the region selected',
+    technologies: ['Django', 'PostgreSQL', 'Tailwind CSS'],
+    link: 'https://sigerisata.rikza.net ',
+    size: 'large'
+  },
+  {
     title: 'Portfolio Website',
-    description: 'A personal portfolio website to showcase my projects and skills.',
+    description: 'The Website you are currently seeing. It showcase my skills and project, Hope you like it :)',
     technologies: ['React', 'Tailwind CSS', 'JavaScript'],
-    link: 'https://yourportfolio.com',
+    link: '',
     size: 'large'
   },
   {
-    title: 'E-commerce Platform',
-    description: 'A full-featured e-commerce platform with user authentication, product management, and a shopping cart.',
-    technologies: ['Node.js', 'Express', 'MongoDB', 'React'],
-    link: 'https://yourecommerce.com',
-    size: 'large'
+    title: 'LaundryEase Backend',
+    description: 'An application for laundry status tracking, my part in this project is to create a order detail feature, search and filter laundry feature.',
+    technologies: ['Nest.js'],
+    link: 'https://github.com/eddoog/ease/tree/rikza',
+    size: 'group'
   },
   {
-    title: 'Social Media App',
-    description: 'A social media application with real-time chat, post sharing, and user profiles.',
-    technologies: ['React', 'Firebase', 'Redux'],
-    link: 'https://yoursocialmediaapp.com',
-    size: 'large'
+    title: 'LaundryEase Frontend',
+    description: 'An application for laundry status tracking, my part in this project is to create a order detail feature, search and filter laundry feature.',
+    technologies: ['Next.js'],
+    link: 'https://github.com/eddoog/laundry/tree/rikza',
+    size: 'group'
   },
   {
-    title: 'Weather App',
-    description: 'A simple weather app that shows the current weather conditions in your location.',
-    technologies: ['React', 'OpenWeatherMap API'],
-    link: 'https://yourweatherapp.com',
+    title: 'SeKelas',
+    description: 'A class management app, my part in this project is creating an authentication using jwt token',
+    technologies: ['Spring Boot', 'PostgreSQL'],
+    link: 'https://github.com/rikzakurnia/sekelas-account-copy/tree/main',
+    size: 'group'
+  },
+  {
+    title: 'Book Reviews',
+    description: 'A simple backend project to see, add and review a book (Part of IBM Course)',
+    technologies: ['Express.js', 'Javascript'],
+    link: 'https://github.com/rikku18/expressBookReviews',
     size: 'mini'
   },
   {
-    title: 'Todo List App',
-    description: 'A basic todo list app to manage daily tasks.',
-    technologies: ['React', 'LocalStorage'],
-    link: 'https://yourtodolist.com',
+    title: 'Budget Management',
+    description: 'A frontend project for personal budget management(Part of IBM Course)',
+    technologies: ['React.js', 'Javascript'],
+    link: 'https://github.com/rikku18/expressBookReviews',
     size: 'mini'
   },
-  // Add more projects as needed
 ];
 
 export default projectsData;

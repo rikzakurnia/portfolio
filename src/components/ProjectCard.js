@@ -2,10 +2,10 @@ import React from 'react';
 
 const ProjectCard = ({ project }) => {
   return (
-    <div className="bg-gray-800 shadow-lg rounded-lg overflow-hidden hover:scale-105">
+    <div className="bg-white-300 shadow-xl rounded-lg border-b-2 border-double border-green-500 overflow-hidden hover:scale-105">
       <div className="p-4">
-        <h3 className="text-xl text-white font-bold mb-2">{project.title}</h3>
-        <p className="text-white-700 mb-4">{project.description}</p>
+        <h3 className="text-xl text-green-500 font-bold mb-2">{project.title}</h3>
+        <p className="text-black mb-4">{project.description}</p>
         <div className="mb-4">
           {project.technologies.map((tech, index) => (
             <span
@@ -16,14 +16,26 @@ const ProjectCard = ({ project }) => {
             </span>
           ))}
         </div>
-        <a
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 hover:text-blue-700"
-        >
-          View Project
-        </a>
+        {project.size === 'large' && (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:text-blue-700"
+          >
+            View Project
+          </a>
+        )}
+        {project.size !== 'large' && (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:text-blue-700"
+          >
+            View Repository
+          </a>
+        )}
       </div>
     </div>
   );
