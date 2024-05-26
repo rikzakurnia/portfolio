@@ -16,14 +16,14 @@ const projectsData = [
   },
   {
     title: 'LaundryEase Backend',
-    description: 'An application for laundry status tracking, my part in this project is to create a order detail feature, search and filter laundry feature.',
+    description: 'An application for laundry status tracking, my part in this project is to create an order detail feature and also create search and filter laundry feature.',
     technologies: ['Nest.js'],
     link: 'https://github.com/eddoog/ease/tree/rikza',
     size: 'group'
   },
   {
     title: 'LaundryEase Frontend',
-    description: 'An application for laundry status tracking, my part in this project is to create a order detail feature, search and filter laundry feature.',
+    description: 'An application for laundry status tracking, my part in this project is to create an order detail feature and also create search and filter laundry feature.',
     technologies: ['Next.js'],
     link: 'https://github.com/eddoog/laundry/tree/rikza',
     size: 'group'
