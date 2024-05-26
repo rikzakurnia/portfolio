@@ -1,1 +1,1 @@
-This project deployed to [open the portfolio](https://portfolio.rikza.net)
+This project deployed [here](https://portfolio.rikza.net)
