@@ -2,7 +2,7 @@ import React from 'react';
 
 const ExperienceCard = ({ experience }) => {
     return (
-    <div className="bg-white shadow-lg border-b-2 rounded-lg overflow-hidden hover:scale-105 p-4 mb-4 border-b border-gray-200">
+    <div className="bg-white shadow-lg border-b-2 rounded-lg overflow-hidden p-4 mb-4 border-b border-gray-200">
         <div className="flex items-center">
           <img
             src={experience.companyLogo}
@@ -15,7 +15,7 @@ const ExperienceCard = ({ experience }) => {
             <p className="text-gray-500">{experience.duration}</p>
           </div>
         </div>
-        <p className="text-gray-700 mt-4">{experience.description}</p>
+        <p className="cursor-default text-gray-700 mt-4">{experience.description}</p>
       </div>
     );
 };

@@ -20,7 +20,7 @@ const About = () => {
       <div className="flex flex-col md:flex-row mt-12">
         <div className="md:w-1/2 text-center mr-5 md:text-left">
           <h2 className="text-green-500 text-xl font-bold md:text-base mb-2">About Me</h2>
-          <p className="text-gray-600">
+          <p className="text-justify cursor-default text-gray-600">
           I'm an undergraduate CS student with a passion for software development. Experienced in building web applications with frameworks like Next.js, Express.js, Django, Flask and Spring Boot. I’m also a fast learner and can adapt to any tech stack.
 
           Currently, I'm diving deep into cloud architecture and best practices to ensure my applications are scalable and secure, while actively learning more about security and database optimization.
