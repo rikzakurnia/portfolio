@@ -43,6 +43,12 @@ const Sidebar = ({ setSelectedSection, isSidebarVisible}) => {
         </li>
         <li
           className="cursor-pointer hover:bg-gray-700 p-2 rounded text-center"
+          onClick={() => setSelectedSection('Experience')}
+        >
+          Experience
+        </li>
+        <li
+          className="cursor-pointer hover:bg-gray-700 p-2 rounded text-center"
           onClick={() => setSelectedSection('Contact')}
         >
           Contact

@@ -1,5 +1,5 @@
 import React from 'react'
-import blogData from '../blogData'
+import blogData from '../data/blogData'
 
 function Blogs() {
   return (

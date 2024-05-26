@@ -6,6 +6,7 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Blogs from './components/Blogs';
 import Contact from './components/Contact';
+import Experience from './components/Experience';
 import './index.css';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -25,6 +26,8 @@ function App() {
         return <Blogs />;
       case 'Contact':
         return <Contact />;
+      case 'Experience':
+        return <Experience />;
       default:
         return <About />;
     }
