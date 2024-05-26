@@ -18,7 +18,7 @@ function Contact() {
       .then(
         () => {
           toast.success('Message sent successfully!');
-          form.current.reset(); // Clear the form values
+          form.current.reset(); 
         },
         (error) => {
           toast.error('Failed to send message. Please try again later.');
@@ -31,7 +31,7 @@ function Contact() {
     <div>
       <ToastContainer />
       <h2 className="text-3xl text-center font-bold pt-16 mb-5">Contact Me Using This Form</h2>
-      <h2 className="text-md text-center mb-6">Make sure your data is correct so I can send you a reply</h2>
+      <h2 className="text-md text-center mb-6">Make sure your email is correct so I can send you a reply</h2>
       <form ref={form} onSubmit={sendEmail} className="w-full max-w-md mx-auto">
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-medium mb-2">Name</label>

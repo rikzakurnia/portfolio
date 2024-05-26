@@ -6,7 +6,7 @@ function Blogs() {
     <div className="container mx-auto px-4 py-16">
       <h2 className="text-3xl text-center font-bold mb-6">Blogs</h2>
       <h2 className="text-xl text-center mb-2">
-        To keep up with my latest article, follow me on medium{" "}
+      Dive into my collection of articles where I share insights on software development's best practices and offer tips and tutorials regarding that topics. To keep up with my latest article, follow me on medium{" "}
         <a class="text-blue underline" href="https://medium.com/@rikza.kurnia">
           here
         </a>
