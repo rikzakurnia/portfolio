@@ -15,6 +15,13 @@ const projectsData = [
     size: 'large'
   },
   {
+    title: 'Rempahpedia (Backend)',
+    description: 'An application that implements machine learning models to predict spices based on image, the final project for Bangkit program',
+    technologies: ['Express.js, Cloud SQL, Firebase'],
+    link: 'https://github.com/orgs/RempahPedia/repositories',
+    size: 'group'
+  },
+  {
     title: 'LaundryEase Backend',
     description: 'An application for laundry status tracking, my part in this project is to create an order detail feature and also create search and filter laundry feature.',
     technologies: ['Nest.js'],
