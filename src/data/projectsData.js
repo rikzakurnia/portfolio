@@ -16,7 +16,7 @@ const projectsData = [
   },
   {
     title: 'Rempahpedia (Backend)',
-    description: 'An application that implements machine learning models to predict spices based on image, the final project for Bangkit program',
+    description: 'Capstone project for Bangkit Academy program. An application that implements machine learning models to predict spices based on image',
     technologies: ['Express.js, Cloud SQL, Firebase'],
     link: 'https://github.com/orgs/RempahPedia/repositories',
     size: 'group'
