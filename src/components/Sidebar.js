@@ -1,61 +1,66 @@
 // src/components/Sidebar.js
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-const Sidebar = ({ setSelectedSection, isSidebarVisible, changePages, isMobile}) => {
+const Sidebar = ({ isMobile, changePages, isSidebarVisible }) => {
+  const navItems = [
+    { name: 'About Me', path: '/about' },
+    { name: 'Projects', path: '/projects' },
+    { name: 'Skills', path: '/skills' },
+    { name: 'Blogs', path: '/blogs' },
+    { name: 'Experience', path: '/experience' },
+    { name: 'Contact', path: '/contact' },
+  ];
+
   return (
     <div
-      className={`fixed inset-y-0 left-0 transform ${
-        isSidebarVisible ? 'translate-x-0' : '-translate-x-full'
-      } ${
-        isMobile ? '' : 'md:translate-x-0'
-      } transition-transform duration-300 ease-in-out md:fixed md:w-72 bg-gray-800 text-white flex flex-col p-4 px-5 md:h-1000 z-50 overflow-hidden`}
+      className={`
+        fixed top-0 left-0 h-full bg-gray-900 text-white w-80 p-5 z-40
+        flex flex-col 
+        items-center 
+        justify-center 
+        transition-transform duration-300
+        ${isMobile && !isSidebarVisible ? '-translate-x-full' : 'translate-x-0'}
+        md:translate-x-0
+      `}
     >
-      <div className="self-center mb-5 mt-10">
-        <img
-          className="rounded-full w-32 h-32 md:w-24 md:h-24"
-          src="https://storage.googleapis.com/bucket-for-ppl-rikza/Profil-Rikza.jpeg"
-          alt="profil_rikza"
-        />
+      {/* Tombol Close (hanya di mobile) */}
+      {isMobile && (
+        <button
+          onClick={changePages}
+          className="absolute top-4 right-4 text-white text-2xl p-2 z-50 focus:outline-none" // Posisi absolut di pojok kanan atas
+        >
+          ✖
+        </button>
+      )}
+
+      {/* Konten Sidebar */}
+      <div className="flex flex-col items-center text-center w-full">
+        <h1 className="text-2xl font-bold mb-8">Rikza's Portfolio</h1>
+
+        <nav className="w-full"> 
+          <ul className="space-y-4"> 
+            {navItems.map((item) => (
+              <li key={item.name}>
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `
+                      block text-lg py-2 px-4 rounded-md // Tambah padding pada link itu sendiri
+                      hover:text-blue-400 hover:bg-gray-800 // Hover background
+                      transition-colors duration-200
+                      ${isActive ? 'text-blue-400 font-bold bg-gray-800' : ''}
+                    `
+                  }
+                  onClick={isMobile ? changePages : undefined}
+                >
+                  {item.name}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
-      <h1 className="text-2xl font-bold mb-6 text-center">Rikza K</h1>
-      <ul className="space-y-5 mx-8 mb-64 h-screen mb-200">
-        <li
-          className="w-full cursor-pointer hover:bg-gray-700 p-2 rounded text-center"
-          onClick={() => {setSelectedSection('About'); changePages()}}
-        >
-          About Me
-        </li>
-        <li
-          className="cursor-pointer hover:bg-gray-700 p-2 rounded text-center"
-          onClick={() => {setSelectedSection('Projects');changePages()}}
-        >
-          Projects
-        </li>
-        <li
-          className="cursor-pointer hover:bg-gray-700 p-2 rounded text-center"
-          onClick={() => {setSelectedSection('Skills'); changePages()}}
-        >
-          Skills
-        </li>
-        <li
-          className="cursor-pointer hover:bg-gray-700 p-2 rounded text-center"
-          onClick={() => {setSelectedSection('Blogs'); changePages()}}
-        >
-          Blogs
-        </li>
-        <li
-          className="cursor-pointer hover:bg-gray-700 p-2 rounded text-center"
-          onClick={() => {setSelectedSection('Experience'); changePages()}}
-        >
-          Experience
-        </li>
-        <li
-          className="cursor-pointer hover:bg-gray-700 p-2 rounded text-center"
-          onClick={() => {setSelectedSection('Contact'); changePages()}}
-        >
-          Contact
-        </li>
-      </ul>
     </div>
   );
 };

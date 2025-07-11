@@ -26,3 +26,58 @@ height: 100%;
 margin: 0;
 }
   
+/* src/index.css */
+
+/* Umum untuk semua slide */
+.slide-next-enter,
+.slide-prev-enter,
+.slide-next-exit,
+.slide-prev-exit {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  /* Tambahkan properti ini untuk memastikan reset awal */
+  will-change: transform, opacity; /* Memberi tahu browser untuk mengoptimalkan animasi */
+}
+
+/* Animasi untuk slide "next" (ke bawah dalam sidebar) */
+.slide-next-enter {
+  opacity: 0;
+  transform: translateY(100%);
+}
+.slide-next-enter-active {
+  opacity: 1;
+  transform: translateY(0%);
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+.slide-next-exit {
+  opacity: 1;
+  transform: translateY(0%);
+}
+.slide-next-exit-active {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+
+/* Animasi untuk slide "prev" (ke atas dalam sidebar) */
+.slide-prev-enter {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+.slide-prev-enter-active {
+  opacity: 1;
+  transform: translateY(0%);
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+.slide-prev-exit {
+  opacity: 1;
+  transform: translateY(0%);
+}
+.slide-prev-exit-active {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
