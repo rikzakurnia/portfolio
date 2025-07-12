@@ -71,7 +71,7 @@ const About = () => {
           className="md:w-1/2 text-center mr-5 md:text-left"
           variants={containerVariants}
         >
-          <motion.h2 className="text-green-500 text-xl font-bold md:text-base mb-2" variants={itemVariants}>
+          <motion.h2 className="text-green-500 text-xl font-bold pt-5 md:text-base mb-2" variants={itemVariants}>
             About Me
           </motion.h2>
           <motion.p className="text-justify cursor-default text-gray-600" variants={itemVariants}>

@@ -1,65 +1,171 @@
-import React from 'react';
-import { FaNodeJs, FaReact, FaPython, FaJava } from 'react-icons/fa';
-import { SiNextdotjs, SiNestjs, SiDjango, SiSpringboot, SiPostgresql, SiFirebase, SiMysql, SiFlask, SiJavascript } from 'react-icons/si';
+// src/components/Skills.js
+import React, { useState } from 'react'; // Import useState
+import { motion, AnimatePresence } from 'framer-motion'; // Import AnimatePresence untuk animasi tooltip
+import {
+  FaNodeJs, FaReact, FaPython, FaJava
+} from 'react-icons/fa';
+import {
+  SiNextdotjs, SiNestjs, SiDjango, SiSpringboot, SiPostgresql,
+  SiFirebase, SiMysql, SiFlask, SiJavascript, SiDocker,
+  SiGo, SiAmazonaws, SiGooglecloud
+} from 'react-icons/si';
 
-const skills = [
+// Pastikan skillsData sudah diperbarui dengan properti `description`
+const skillsData = [
+  // ... (skillsData yang sudah diperbarui dengan 'description' di sini)
+  {
+    category: 'Programming Languages',
+    skills: [
+      { name: 'Python', icon: <FaPython size={32} />, description: 'Used for developing web application and to learn machine learning' },
+      { name: 'Java', icon: <FaJava size={32} />, description: 'Used for developing web application.' },
+      { name: 'JavaScript', icon: <SiJavascript size={32} />, description: 'Used for frontend and backend (Node.js) development.' },
+      { name: 'Go (Golang)', icon: <SiGo size={32} />, description: 'Used for backend project' },
+    ],
+  },
   {
     category: 'Frameworks & Libraries',
     skills: [
-      { name: 'Node.js', icon: <FaNodeJs size={32} /> },
-      { name: 'Next.js', icon: <SiNextdotjs size={32} /> },
-      { name: 'Nest.js', icon: <SiNestjs size={32} /> },
-      { name: 'Django', icon: <SiDjango size={32} /> },
-      { name: 'Spring Boot', icon: <SiSpringboot size={32} /> },
-      { name: 'Flask', icon: <SiFlask size={32} /> },
-      { name: 'React', icon: <FaReact size={32}/> }
+      { name: 'Node.js', icon: <FaNodeJs size={32} />, description: 'Used for several projects including "Rempahpedia"' },
+      { name: 'Next.js', icon: <SiNextdotjs size={32} />, description: 'Used for "Sekelas" Application' },
+      { name: 'Nest.js', icon: <SiNestjs size={32} />, description: 'Used for "LaundryEase" Application' },
+      { name: 'Django', icon: <SiDjango size={32} />, description: 'Used for "RSUMMI" Application.' },
+      { name: 'Spring Boot', icon: <SiSpringboot size={32} />, description: 'Used for "Sekelas" Application.' },
+      { name: 'Flask', icon: <SiFlask size={32} />, description: 'Used for a project in class.' },
+      { name: 'React', icon: <FaReact size={32} />, description: 'Used for this website.' },
     ],
   },
   {
     category: 'Databases',
     skills: [
-      { name: 'PostgreSQL', icon: <SiPostgresql size={32} /> },
-      { name: 'Firestore', icon: <SiFirebase size={32} /> },
-      { name: 'MySQL', icon: <SiMysql size={32} /> },
+      { name: 'PostgreSQL', icon: <SiPostgresql size={32} />, description: 'Used in most of my project.' },
+      { name: 'Firestore', icon: <SiFirebase size={32} />, description: 'Used in "Rempahpedia" project.' },
+      { name: 'MySQL', icon: <SiMysql size={32} />, description: 'Used in some project.' },
     ],
   },
   {
-    category: 'Programming Languages',
+    category: 'Cloud & DevOps',
     skills: [
-      { name: 'Python', icon: <FaPython size={32} /> },
-      { name: 'Java', icon: <FaJava size={32} /> },
-      { name: 'JavaScript', icon: <SiJavascript size={32} /> },
+      { name: 'AWS (Amazon Web Services)', icon: <SiAmazonaws size={32} />, description: 'Experience with EC2, S3, and Lambda for deployments.' },
+      { name: 'Google Cloud Platform (GCP)', icon: <SiGooglecloud size={32} />, description: 'Associate Cloud Engineer Certification' },
+      { name: 'Docker', icon: <SiDocker size={32} />, description: 'Used in almost all of my project for easier deployment' },
+    ],
+  },
+  {
+    category: 'Tools & Scripting',
+    skills: [
+      { name: 'Bash Scripting', icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+            <path d="M20 4H4C2.89543 4 2 4.89543 2 6V18C2 19.1046 2.89543 20 4 20H20C21.1046 20 22 19.1046 22 18V6C22 4.89543 21.1046 4 20 4ZM4 6H20V18H4V6ZM6 10H8V12H6V10ZM9 10H17V12H9V10ZM6 14H8V16H6V14ZM9 14H17V16H9V14Z"/>
+        </svg>
+      ), description: 'Used in my thesis to automate deployment process' },
     ],
   },
 ];
 
-const Skills = () => {
+
+const SkillItem = ({ skill, itemVariants }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const tooltipVariants = {
+    hidden: { opacity: 0, y: -10, scale: 0.8 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.2, ease: "easeOut" } },
+    exit: { opacity: 0, y: -10, scale: 0.8, transition: { duration: 0.15, ease: "easeIn" } },
+  };
+
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold mb-6">Skills</h1>
-      {skills.map((category) => (
-        <div key={category.category} className="mb-8">
-          <h2 className="text-2xl mb-4">{category.category}</h2>
+    <motion.div
+      key={skill.name}
+      className="
+        relative // Penting untuk posisi tooltip
+        flex items-center bg-gray-100 border border-gray-300 p-4 m-2 rounded-lg shadow-md
+        transition-transform duration-200 hover:scale-105 hover:shadow-lg
+        text-gray-800 cursor-pointer
+      "
+      variants={itemVariants}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="text-gray-600">
+          {skill.icon}
+      </div>
+      <span className="ml-3 text-lg font-medium">{skill.name}</span>
+
+      {/* Tooltip */}
+      <AnimatePresence>
+        {isHovered && skill.description && (
+          <motion.div
+            className="
+              absolute bottom-full  mb-2
+              w-max max-w-xs p-2 text-sm text-white bg-gray-700
+              rounded-md shadow-lg z-50
+            "
+            variants={tooltipVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            {skill.description}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+
+const Skills = () => {
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+        staggerChildren: 0.1,
+        when: "beforeChildren",
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+  };
+
+  return (
+    <motion.div
+      className="p-8"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.h1
+        className="text-3xl font-bold mb-6"
+        variants={itemVariants}
+      >
+        Skills
+      </motion.h1>
+      {skillsData.map((category) => (
+        <motion.div
+          key={category.category}
+          className="mb-8"
+          variants={containerVariants} 
+        >
+          <motion.h2
+            className="text-2xl font-semibold mb-4 text-gray-700"
+            variants={itemVariants}
+          >
+            {category.category}
+          </motion.h2>
           <div className="flex flex-wrap">
             {category.skills.map((skill) => (
-              <div key={skill.name} className="flex items-center bg-white-800 border border-gray-800 p-4 m-2 rounded-lg shadow-md  hover:scale-105">
-                {skill.icon}
-                <span className="ml-2 text-gray-800">{skill.name}</span>
-              </div>
+              <SkillItem key={skill.name} skill={skill} itemVariants={itemVariants} />
             ))}
           </div>
-        </div>
+        </motion.div>
       ))}
-      <h2 className="text-2xl mb-4">Cloud Services</h2>
-          <div className="flex flex-wrap">
-              <div className="flex items-center bg-white-800 border border-gray-800 p-4 m-2 rounded-lg shadow-md  hover:scale-105">
-              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-                <path fill="#1976d2" d="M38.193,18.359c-0.771-2.753-2.319-5.177-4.397-7.03l-4.598,4.598	c1.677,1.365,2.808,3.374,3.014,5.648v1.508c0.026,0,0.05-0.008,0.076-0.008c2.322,0,4.212,1.89,4.212,4.212S34.61,31.5,32.288,31.5	c-0.026,0-0.05-0.007-0.076-0.008V31.5h-6.666H24V38h8.212v-0.004c0.026,0,0.05,0.004,0.076,0.004C38.195,38,43,33.194,43,27.288	C43,23.563,41.086,20.279,38.193,18.359z"></path><path fill="#ffe082" d="M19.56,25.59l4.72-4.72c-0.004-0.005-0.008-0.009-0.011-0.013l-4.717,4.717	C19.554,25.579,19.557,25.584,19.56,25.59z" opacity=".5"></path><path fill="#90caf9" d="M19.56,25.59l4.72-4.72c-0.004-0.005-0.008-0.009-0.011-0.013l-4.717,4.717	C19.554,25.579,19.557,25.584,19.56,25.59z" opacity=".5"></path><path fill="#ff3d00" d="M24,7.576c-8.133,0-14.75,6.617-14.75,14.75c0,0.233,0.024,0.46,0.035,0.69h6.5	c-0.019-0.228-0.035-0.457-0.035-0.69c0-4.549,3.701-8.25,8.25-8.25c1.969,0,3.778,0.696,5.198,1.851l4.598-4.598	C31.188,9.003,27.761,7.576,24,7.576z"></path><path fill="#90caf9" d="M15.712,31.5L15.712,31.5c-0.001,0-0.001,0-0.002,0c-0.611,0-1.188-0.137-1.712-0.373	l-4.71,4.71C11.081,37.188,13.301,38,15.71,38c0.001,0,0.001,0,0.002,0v0H24v-6.5H15.712z" opacity=".5"></path><path fill="#4caf50" d="M15.712,31.5L15.712,31.5c-0.001,0-0.001,0-0.002,0c-0.611,0-1.188-0.137-1.712-0.373l-4.71,4.71	C11.081,37.188,13.301,38,15.71,38c0.001,0,0.001,0,0.002,0v0H24v-6.5H15.712z"></path><path fill="#ffc107" d="M11.5,27.29c0-2.32,1.89-4.21,4.21-4.21c1.703,0,3.178,1.023,3.841,2.494l4.717-4.717	c-1.961-2.602-5.065-4.277-8.559-4.277C9.81,16.58,5,21.38,5,27.29c0,3.491,1.691,6.59,4.288,8.547l4.71-4.71	C12.53,30.469,11.5,28.999,11.5,27.29z"></path>
-              </svg>
-                <span className="ml-2 text-gray-800">Google Cloud Platform</span>
-              </div>
-          </div>
-    </div>
+    </motion.div>
   );
 };
 
