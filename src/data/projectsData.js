@@ -1,60 +1,121 @@
-// src/projectsData.js
+// src/data/projectsData.js
 const projectsData = [
+  // 1. FLAGSHIP PROJECT (PLACEHOLDER)
   {
+    id: 0,
+    title: 'Smart Photo Storage (In Development)',
+    image: 'https://storage.googleapis.com/bucket-for-ppl-rikza/under_construction_PNG42.png',
+    description: 'Currently building an intelligent photo management application. The goal is to use machine learning to make photos searchable through natural language queries.',
+    highlights: [
+      'Goal: Implement natural language photo search using ML.',
+      'Architecting with asynchronous processing & microservices.',
+      'Focusing on a scalable and containerized (Docker) system.',
+      'Currently developing core MVP features (auth, upload).',
+    ],
+    technologies: ['Next.js', 'Go (Golang)', 'Python', 'Docker', 'RabbitMQ', 'PostgreSQL'],
+    category: '',
+    isFlagship: true,
+    demoLink: null,
+    repoLink: null,
+  },
+
+  // 2. HIGHLIGHTED PROJECTS
+  {
+    id: 2,
+    title: 'Rempahpedia - Spice Recognition Application',
+    image: 'https://storage.googleapis.com/bucket-for-ppl-rikza/rempahpedia.png',
+    description: 'Developed as part of the Bangkit Academy final project, Rempahpedia is an application that recognizes various spices using machine learning models. My role is on the backend development',
+    highlights: [
+      'Developed application logic using Express.js',
+      'Ensured secure API access with Firebase authentication',
+      'Stored application data on Cloud SQL',
+      'Deployed ML models on cloud services for scalability',
+    ],
+    technologies: ['Express.js', 'Firebase', 'Cloud SQL', 'GCP'],
+    category: 'highlighted',
+    isFlagship: false,
+    demoLink: "https://www.youtube.com/watch?v=fEXY0inw7Sc&ab_channel=Ruzain&t=10m48s", 
+    repoLink: 'https://github.com/orgs/RempahPedia/repositories',
+  },
+  {
+    id: 5,
+    title: 'FarmasiCare – Hospital Supply Management',
+    image: 'https://storage.googleapis.com/bucket-for-ppl-rikza/farmasicare.png',
+    description: 'A group project for a college course aimed at developing a hospital supply management app based on the client\'s request.',
+    highlights: [
+      'Configured CI/CD for automated deployment processes',
+      'Data storage using PostgreSQL',
+      'Server deployment on Google Cloud Instances',
+    ],
+    technologies: ['Django', 'PostgreSQL', 'GCP', 'CI/CD'],
+    category: 'highlighted',
+    isFlagship: false,
+    demoLink: "https://www.youtube.com/watch?v=WIBEd2Mo2u8&ab_channel=ReyhanVivaldi", 
+    repoLink: null,
+  },
+  {
+    id: 6,
+    title: 'Gacha-as-a-Service',
+    image: 'https://storage.googleapis.com/bucket-for-ppl-rikza/gacha-saas.png',
+    description: 'A group project for a college course aimed at developing a multi-tenant SaaS that allows each user to manage their own gacha system. My role on this project is to deploy the product on scalable infrastructure',
+    highlights: [
+      'Service deployment using Google Cloud Run',
+      'Database replication management for high availability',
+      'Load balancer configuration for traffic distribution',
+    ],
+    technologies: ['Go (Golang)', 'Google Cloud Run', 'Load Balancing'],
+    category: 'highlighted',
+    isFlagship: false,
+    demoLink: "https://www.youtube.com/watch?v=oixK2LAW6e4&t=250s&ab_channel=Ruzain&t=4m10s", 
+    repoLink: null,
+  },
+
+  // 3. OTHER PROJECTS
+  {
+    id: 1,
     title: 'Sigerisata',
-    description: 'A tourism application that help tourist in Lampung province to find and choose their destination based on the region selected',
+    image: null,
+    description: 'A tourism application to help tourists in Lampung province find destinations based on a selected region.',
+    highlights: [
+      'Full-stack application with Django',
+      'Region-based destination filtering',
+    ],
     technologies: ['Django', 'PostgreSQL', 'Tailwind CSS'],
-    link: 'https://sigerisata.rikza.net ',
-    size: 'large'
+    category: 'other',
+    isFlagship: false,
+    demoLink: null, 
+    repoLink: 'https://github.com/rikzakurnia/Sigerisata',
   },
   {
-    title: 'Portfolio Website',
-    description: 'The Website you are currently seeing. It showcase my skills and project, Hope you like it :)',
-    technologies: ['React', 'Tailwind CSS', 'JavaScript'],
-    link: '',
-    size: 'large'
+    id: 3,
+    title: 'LaundryEase App',
+    image: null,
+    description: 'A laundry status tracking application. My role was to create the order detail, search, and filter features.',
+    highlights: [
+      'Contributed to both Frontend and Backend',
+      'Implemented complex search & filter functionality',
+      'Collaborated in a developer team',
+    ],
+    technologies: ['Next.js', 'Nest.js', 'TypeScript'],
+    category: 'other',
+    isFlagship: false,
+    demoLink: null, 
+    repoLink: 'https://github.com/eddoog/ease',
   },
   {
-    title: 'Rempahpedia (Backend)',
-    description: 'Capstone project for Bangkit Academy program. An application that implements machine learning models to predict spices based on image',
-    technologies: ['Express.js, Cloud SQL, Firebase'],
-    link: 'https://github.com/orgs/RempahPedia/repositories',
-    size: 'group'
-  },
-  {
-    title: 'LaundryEase Backend',
-    description: 'An application for laundry status tracking, my part in this project is to create an order detail feature and also create search and filter laundry feature.',
-    technologies: ['Nest.js'],
-    link: 'https://github.com/eddoog/ease/tree/rikza',
-    size: 'group'
-  },
-  {
-    title: 'LaundryEase Frontend',
-    description: 'An application for laundry status tracking, my part in this project is to create an order detail feature and also create search and filter laundry feature.',
-    technologies: ['Next.js'],
-    link: 'https://github.com/eddoog/laundry/tree/rikza',
-    size: 'group'
-  },
-  {
-    title: 'SeKelas',
-    description: 'A class management app, my part in this project is creating an authentication using jwt token',
-    technologies: ['Spring Boot', 'PostgreSQL'],
-    link: 'https://github.com/rikzakurnia/sekelas-account-copy/tree/main',
-    size: 'group'
-  },
-  {
-    title: 'Book Reviews',
-    description: 'A simple backend project to see, add and review a book (Part of IBM Course)',
-    technologies: ['Express.js', 'Javascript'],
-    link: 'https://github.com/rikku18/expressBookReviews',
-    size: 'mini'
-  },
-  {
-    title: 'Budget Management',
-    description: 'A frontend project for personal budget management(Part of IBM Course)',
-    technologies: ['React.js', 'Javascript'],
-    link: 'https://github.com/rikku18/expressBookReviews',
-    size: 'mini'
+    id: 4,
+    title: 'SeKelas (Auth Service)',
+    image: null,
+    description: 'A class management application, where I created the authentication service using JWT.',
+    highlights: [
+      'Implemented security with JSON Web Tokens (JWT)',
+      'Backend developed with Java & Spring Boot',
+    ],
+    technologies: ['Spring Boot', 'PostgreSQL', 'Java'],
+    category: 'other',
+    isFlagship: false,
+    demoLink: null, 
+    repoLink: 'https://github.com/rikzakurnia/sekelas-account-copy/tree/main',
   },
 ];
 
