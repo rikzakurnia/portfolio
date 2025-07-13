@@ -27,9 +27,22 @@ const Sidebar = ({ isMobile, changePages, isSidebarVisible }) => {
       {isMobile && (
         <button
           onClick={changePages}
-          className="absolute top-4 right-4 text-white text-2xl p-2 z-50 focus:outline-none" // Posisi absolut di pojok kanan atas
+          className="absolute top-4 right-4 text-white p-2 z-50 focus:outline-none" 
         >
-          ✖
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2.5} 
+            stroke="currentColor" 
+            className="w-7 h-7 stroke-white" 
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
         </button>
       )}
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion'; // 1. Import motion
+import { motion } from 'framer-motion'; 
 import blogData from '../data/blogData';
 import BlogCard from './BlogCard';
 
@@ -7,7 +7,6 @@ function Blogs() {
   const highlightedArticles = blogData.filter(blog => blog.isHighlighted);
   const regularArticles = blogData.filter(blog => !blog.isHighlighted);
 
-  // 2. Definisikan varian animasi, mirip seperti di About.js
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -31,7 +30,7 @@ function Blogs() {
   };
 
   return (
-    // 3. Ganti div utama dengan motion.div dan terapkan varian
+
     <motion.div
       className="bg-slate-50"
       variants={containerVariants}
@@ -40,7 +39,7 @@ function Blogs() {
     >
       <div className="container mx-auto px-4 py-24 sm:px-6 lg:px-8">
         
-        {/* Bagian Header Utama */}
+
         <motion.div className="text-center mb-20" variants={containerVariants}>
           <motion.h1
             className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl"
@@ -64,7 +63,7 @@ function Blogs() {
           </motion.p>
         </motion.div>
 
-        {/* Bagian Artikel Unggulan (Highlighted) */}
+
         {highlightedArticles.length > 0 && (
           <motion.div className="mb-20" variants={containerVariants}>
             <motion.h2
@@ -89,7 +88,6 @@ function Blogs() {
           </motion.div>
         )}
 
-        {/* Bagian Artikel Lainnya */}
         {regularArticles.length > 0 && (
            <motion.div variants={containerVariants}>
             <motion.h2
@@ -100,7 +98,7 @@ function Blogs() {
             </motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               {regularArticles.map((blog) => (
-                // 5. Bungkus setiap kartu dengan motion.div juga
+
                 <motion.div key={blog.id} variants={itemVariants}>
                   <BlogCard
                     imgSrc={blog.imgSrc}
