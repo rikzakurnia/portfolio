@@ -9,7 +9,6 @@ const Sidebar = ({ isMobile, changePages, isSidebarVisible }) => {
     { name: 'Skills', path: '/skills' },
     { name: 'Blogs', path: '/blogs' },
     { name: 'Experience', path: '/experience' },
-    { name: 'Contact', path: '/contact' },
   ];
 
   return (

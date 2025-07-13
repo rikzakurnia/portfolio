@@ -8,7 +8,6 @@ import About from './components/About';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Blogs from './components/Blogs';
-import Contact from './components/Contact';
 import Experience from './components/Experience';
 
 import './index.css';
@@ -20,7 +19,6 @@ const routeConfig = [
   { path: '/skills', name: 'Skills', component: Skills },
   { path: '/blogs', name: 'Blogs', component: Blogs },
   { path: '/experience', name: 'Experience', component: Experience },
-  { path: '/contact', name: 'Contact', component: Contact },
 ];
 
 const pageVariants = {
@@ -41,7 +39,7 @@ const pageVariants = {
 const pageTransition = {
   type: "tween",
   ease: "easeOut",
-  duration: 0.25,
+  duration: 0.14,
 };
 
 function App() {

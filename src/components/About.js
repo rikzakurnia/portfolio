@@ -34,7 +34,7 @@ const About = () => {
 
   return (
     <motion.div
-      className="container mx-auto p-8 ml-5" 
+      className="container mx-5 p-8" 
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -66,7 +66,7 @@ const About = () => {
         </motion.div>
       </div>
 
-      <div className="flex flex-col md:flex-row mt-5">
+      <div className="flex flex-col md:flex-row mt-0">
         <motion.div
           className="md:w-1/2 text-center mr-5 md:text-left"
           variants={containerVariants}

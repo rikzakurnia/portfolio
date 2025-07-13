@@ -1,6 +1,5 @@
-// src/components/Skills.js
-import React, { useState } from 'react'; // Import useState
-import { motion, AnimatePresence } from 'framer-motion'; // Import AnimatePresence untuk animasi tooltip
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaNodeJs, FaReact, FaPython, FaJava
 } from 'react-icons/fa';
@@ -10,9 +9,8 @@ import {
   SiGo, SiAmazonaws, SiGooglecloud
 } from 'react-icons/si';
 
-// Pastikan skillsData sudah diperbarui dengan properti `description`
 const skillsData = [
-  // ... (skillsData yang sudah diperbarui dengan 'description' di sini)
+  // ... (data Anda tidak perlu diubah, biarkan seperti semula)
   {
     category: 'Programming Languages',
     skills: [
@@ -63,42 +61,29 @@ const skillsData = [
 ];
 
 
-const SkillItem = ({ skill, itemVariants }) => {
+const SkillItem = ({ skill, variants }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const tooltipVariants = {
-    hidden: { opacity: 0, y: -10, scale: 0.8 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.2, ease: "easeOut" } },
-    exit: { opacity: 0, y: -10, scale: 0.8, transition: { duration: 0.15, ease: "easeIn" } },
+    hidden: { opacity: 0, y: -10, scale: 0.9 },
+    visible: { opacity: 1, y: 0, scale: 1 },
+    exit: { opacity: 0, y: -10, scale: 0.9, transition: { duration: 0.15 } },
   };
 
   return (
     <motion.div
-      key={skill.name}
-      className="
-        relative // Penting untuk posisi tooltip
-        flex items-center bg-gray-100 border border-gray-300 p-4 m-2 rounded-lg shadow-md
-        transition-transform duration-200 hover:scale-105 hover:shadow-lg
-        text-gray-800 cursor-pointer
-      "
-      variants={itemVariants}
+      className="relative flex items-center bg-gray-100 border border-gray-300 p-4 m-2 rounded-lg shadow-md transition-transform duration-200 hover:scale-105 hover:shadow-lg text-gray-800 cursor-pointer"
+      variants={variants} // Menggunakan prop 'variants'
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="text-gray-600">
-          {skill.icon}
-      </div>
+      <div className="text-gray-600">{skill.icon}</div>
       <span className="ml-3 text-lg font-medium">{skill.name}</span>
 
-      {/* Tooltip */}
       <AnimatePresence>
         {isHovered && skill.description && (
           <motion.div
-            className="
-              absolute bottom-full  mb-2
-              w-max max-w-xs p-2 text-sm text-white bg-gray-700
-              rounded-md shadow-lg z-50
-            "
+            className="absolute bottom-full mb-2 w-max max-w-xs p-2 text-sm text-white bg-gray-700 rounded-md shadow-lg z-50"
             variants={tooltipVariants}
             initial="hidden"
             animate="visible"
@@ -112,25 +97,27 @@ const SkillItem = ({ skill, itemVariants }) => {
   );
 };
 
-
 const Skills = () => {
   const containerVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.5,
-        ease: "easeOut",
-        staggerChildren: 0.1,
-        when: "beforeChildren",
+        staggerChildren: 0.1, 
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
   };
 
   return (
@@ -141,29 +128,29 @@ const Skills = () => {
       animate="visible"
     >
       <motion.h1
-        className="text-3xl font-bold mb-6"
-        variants={itemVariants}
+        className="text-3xl font-bold mb-8"
+        variants={itemVariants} 
       >
-        Skills
+        Skills and Tech Stacks
       </motion.h1>
+
       {skillsData.map((category) => (
-        <motion.div
-          key={category.category}
-          className="mb-8"
-          variants={containerVariants} 
-        >
+        <React.Fragment key={category.category}>
           <motion.h2
-            className="text-2xl font-semibold mb-4 text-gray-700"
-            variants={itemVariants}
+            className="text-2xl font-semibold mb-4 text-gray-800"
+            variants={itemVariants} 
           >
             {category.category}
           </motion.h2>
-          <div className="flex flex-wrap">
+          <motion.div
+            className="flex flex-wrap mb-8"
+            variants={containerVariants} 
+          >
             {category.skills.map((skill) => (
-              <SkillItem key={skill.name} skill={skill} itemVariants={itemVariants} />
+              <SkillItem key={skill.name} skill={skill} variants={itemVariants} />
             ))}
-          </div>
-        </motion.div>
+          </motion.div>
+        </React.Fragment>
       ))}
     </motion.div>
   );
