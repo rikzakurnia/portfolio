@@ -6,11 +6,11 @@ import {
 import {
   SiNextdotjs, SiNestjs, SiDjango, SiSpringboot, SiPostgresql,
   SiFirebase, SiMysql, SiFlask, SiJavascript, SiDocker,
-  SiGo, SiAmazonaws, SiGooglecloud
+  SiGo, SiAmazonaws, SiGooglecloud, SiVuedotjs, SiMongodb, SiRabbitmq
 } from 'react-icons/si';
+import { ReactComponent as QdrantIcon } from '../icon/qdrant.svg';
 
 const skillsData = [
-  // ... (data Anda tidak perlu diubah, biarkan seperti semula)
   {
     category: 'Programming Languages',
     skills: [
@@ -30,6 +30,7 @@ const skillsData = [
       { name: 'Spring Boot', icon: <SiSpringboot size={32} />, description: 'Used for "Sekelas" Application.' },
       { name: 'Flask', icon: <SiFlask size={32} />, description: 'Used for a project in class.' },
       { name: 'React', icon: <FaReact size={32} />, description: 'Used for this website.' },
+      { name: 'Vue.js', icon: <SiVuedotjs size={32} />, description: 'Used as the frontend for "Smart Photo Storage" project.' },
     ],
   },
   {
@@ -38,6 +39,8 @@ const skillsData = [
       { name: 'PostgreSQL', icon: <SiPostgresql size={32} />, description: 'Used in most of my project.' },
       { name: 'Firestore', icon: <SiFirebase size={32} />, description: 'Used in "Rempahpedia" project.' },
       { name: 'MySQL', icon: <SiMysql size={32} />, description: 'Used in some project.' },
+      { name: 'MongoDB', icon: <SiMongodb size={32} />, description: 'Used to store metadata in "Smart Photo Storage" project.' },
+      { name: 'Qdrant', icon: <QdrantIcon width={32} height={32} opacity={0.7} />, description: 'Used as the vector database in "Smart Photo Storage".' },
     ],
   },
   {
@@ -46,6 +49,7 @@ const skillsData = [
       { name: 'AWS (Amazon Web Services)', icon: <SiAmazonaws size={32} />, description: 'Experience with EC2, S3, and Lambda for deployments.' },
       { name: 'Google Cloud Platform (GCP)', icon: <SiGooglecloud size={32} />, description: 'Associate Cloud Engineer Certification' },
       { name: 'Docker', icon: <SiDocker size={32} />, description: 'Used in almost all of my project for easier deployment' },
+      { name: 'RabbitMQ', icon: <SiRabbitmq size={32} />, description: 'Used for asynchronous task queue in photo embedding pipeline in "Smart Photo Storage".' },
     ],
   },
   {
@@ -73,7 +77,7 @@ const SkillItem = ({ skill, variants }) => {
   return (
     <motion.div
       className="relative flex items-center bg-gray-100 border border-gray-300 p-4 m-2 rounded-lg shadow-md transition-transform duration-200 hover:scale-105 hover:shadow-lg text-gray-800 cursor-pointer"
-      variants={variants} // Menggunakan prop 'variants'
+      variants={variants} 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

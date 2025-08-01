@@ -40,32 +40,33 @@ const ProjectCard = ({ project }) => {
           ))}
         </div>
 
-        {/* Tombol Aksi - UPDATED */}
-        <div className="mt-auto flex space-x-4 border-t border-slate-200 pt-4">
-          {/* Check for demoLink and use YouTube icon/styling */}
-          {project.demoLink && (
-            <a
-              href={project.demoLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-red-700"
-            >
-              <FaYoutube className="mr-2" />
-              View Demo
-            </a>
-          )}
-          {project.repoLink && (
-            <a
-              href={project.repoLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center rounded-md bg-slate-600 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-slate-700"
-            >
-              <FaGithub className="mr-2" />
-              Repository
-            </a>
-          )}
+        <div className="mt-auto border-t border-slate-200 pt-4">
+          <div className="flex justify-center space-x-4">
+            {project.demoLink && (
+              <a
+                href={project.demoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-red-700"
+              >
+                <FaYoutube className="mr-2" />
+                View Demo
+              </a>
+            )}
+            {project.repoLink && (
+              <a
+                href={project.repoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center rounded-md bg-slate-600 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-slate-700"
+              >
+                <FaGithub className="mr-2" />
+                Repository
+              </a>
+            )}
+          </div>
         </div>
+
       </div>
     </div>
   );

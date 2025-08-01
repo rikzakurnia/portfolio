@@ -5,18 +5,19 @@ const projectsData = [
     id: 0,
     title: 'Smart Photo Storage (In Development)',
     image: 'https://storage.googleapis.com/bucket-for-ppl-rikza/under_construction_PNG42.png',
-    description: 'Currently building an intelligent photo management application. The goal is to use machine learning to make photos searchable through natural language queries.',
+    description: 'End-to-end photo management system designed to enable natural language search using machine learning. Built with a microservice architecture and asynchronous communication to support scalability and future ML integration.',
     highlights: [
-      'Goal: Implement natural language photo search using ML.',
-      'Architecting with asynchronous processing & microservices.',
-      'Focusing on a scalable and containerized (Docker) system.',
-      'Currently developing core MVP features (auth, upload).',
+      'Built MVP with authentication, photo upload, and gallery interface.',
+      'Containerized all services with Docker for consistent deployment.',
+      'Designed asynchronous processing pipeline using RabbitMQ.',
+      'Integrated CLIP-based embedding service with Qdrant for semantic search.',
+      'Next : Deployment on Kubernetes.'
     ],
-    technologies: ['Next.js', 'Go (Golang)', 'Python', 'Docker', 'RabbitMQ', 'PostgreSQL'],
-    category: '',
+    technologies: ['Vue.js', 'Go (Golang)', 'Python', 'Docker', 'RabbitMQ', 'MongoDB', 'Qdrant'],
+    category: 'Full Stack',
     isFlagship: true,
     demoLink: null,
-    repoLink: null,
+    repoLink:"https://github.com/Smart-Photo-Storage-Project/docs",
   },
 
   // 2. HIGHLIGHTED PROJECTS
