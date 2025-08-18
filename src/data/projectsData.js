@@ -16,7 +16,7 @@ const projectsData = [
     technologies: ['Vue.js', 'Go (Golang)', 'Python', 'Docker', 'RabbitMQ', 'MongoDB', 'Qdrant'],
     category: 'Full Stack',
     isFlagship: true,
-    demoLink: null,
+    demoLink: "https://youtu.be/GJICKqlk3X4",
     repoLink:"https://github.com/Smart-Photo-Storage-Project/docs",
   },
 
