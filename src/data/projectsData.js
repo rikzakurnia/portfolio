@@ -4,7 +4,7 @@ const projectsData = [
   {
     id: 0,
     title: 'Smart Photo Storage (In Development)',
-    image: 'https://storage.googleapis.com/bucket-for-ppl-rikza/under_construction_PNG42.png',
+    image: 'https://storage.googleapis.com/bucket-for-ppl-rikza/smart-photo.png',
     description: 'End-to-end photo management system designed to enable natural language search using machine learning. Built with a microservice architecture and asynchronous communication to support scalability and future ML integration.',
     highlights: [
       'Built MVP with authentication, photo upload, and gallery interface.',
