@@ -1,19 +1,18 @@
+// src/components/Blogs.js
 import React from 'react';
-import { motion } from 'framer-motion'; 
+import { motion } from 'framer-motion';
 import blogData from '../data/blogData';
 import BlogCard from './BlogCard';
 
 function Blogs() {
-  const highlightedArticles = blogData.filter(blog => blog.isHighlighted);
-  const regularArticles = blogData.filter(blog => !blog.isHighlighted);
+  const highlightedArticles = blogData.filter((blog) => blog.isHighlighted);
+  const regularArticles = blogData.filter((blog) => !blog.isHighlighted);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.1 },
     },
   };
 
@@ -22,36 +21,33 @@ function Blogs() {
     visible: {
       y: 0,
       opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.5, ease: 'easeOut' },
     },
   };
 
   return (
-
     <motion.div
       className="bg-slate-50"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <div className="container mx-auto px-4 py-24 sm:px-6 lg:px-8">
-        
-
-        <motion.div className="text-center mb-20" variants={containerVariants}>
-          <motion.h1
+      <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        {/* HEADER */}
+        {/* <motion.div className="text-left mb-20" variants={containerVariants}> */}
+          {/* <motion.h1
             className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl"
             variants={itemVariants}
           >
             My Articles
-          </motion.h1>
-          <motion.p
-            className="mt-6 max-w-2xl mx-auto text-lg leading-8 text-slate-600"
+          </motion.h1> */}
+
+          {/* <motion.p
+            className="mt-2 mx-auto text-lg text-slate-600"
             variants={itemVariants}
           >
-            Collection of Articles about the implementation of a concept or tools in the IT field that i write . Follow my latest article on medium{" "}
+            Collection of articles about the implementation of tools and concepts
+            in software development. Follow my latest posts on Medium{' '}
             <a
               href="https://medium.com/@rikza.kurnia"
               target="_blank"
@@ -60,10 +56,10 @@ function Blogs() {
             >
               here
             </a>.
-          </motion.p>
-        </motion.div>
+          </motion.p> */}
+        {/* </motion.div> */}
 
-
+        {/* HIGHLIGHTED ARTICLE SECTION */}
         {highlightedArticles.length > 0 && (
           <motion.div className="mb-20" variants={containerVariants}>
             <motion.h2
@@ -72,9 +68,9 @@ function Blogs() {
             >
               Highlighted Article
             </motion.h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+            <div className="flex flex-col gap-12">
               {highlightedArticles.map((blog) => (
-                // 4. Bungkus setiap kartu dengan motion.div
                 <motion.div key={blog.id} variants={itemVariants}>
                   <BlogCard
                     imgSrc={blog.imgSrc}
@@ -88,17 +84,18 @@ function Blogs() {
           </motion.div>
         )}
 
+        {/* REGULAR ARTICLES */}
         {regularArticles.length > 0 && (
-           <motion.div variants={containerVariants}>
+          <motion.div variants={containerVariants}>
             <motion.h2
               className="text-3xl font-bold text-slate-800 mb-8 border-l-4 border-green-400 pl-4"
               variants={itemVariants}
             >
               Other Articles
             </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {regularArticles.map((blog) => (
 
+            <div className="flex flex-col gap-10">
+              {regularArticles.map((blog) => (
                 <motion.div key={blog.id} variants={itemVariants}>
                   <BlogCard
                     imgSrc={blog.imgSrc}
@@ -111,7 +108,6 @@ function Blogs() {
             </div>
           </motion.div>
         )}
-        
       </div>
     </motion.div>
   );

@@ -51,8 +51,9 @@ const About = () => {
             Rikza Kurnia Almujtaba Lubis
           </motion.h1>
           <motion.h2 className="text-lg md:text-xl text-gray-700 mb-4" variants={itemVariants}>
-            Fresh Graduate | Aspiring Software Developer
+            Software Engineer | Computer Science Graduate
           </motion.h2>
+
         </motion.div>
         <motion.div
           className="md:w-1/2 flex justify-center mt-10 md:mt-0"
@@ -75,11 +76,14 @@ const About = () => {
             About Me
           </motion.h2>
           <motion.p className="text-justify cursor-default text-gray-600" variants={itemVariants}>
-            I am a fresh graduate with a Bachelor's degree in Computer Science, passionate about software development. I have hands-on experience in building robust web applications using frameworks like Next.js, Express.js, Django, Flask, and Spring Boot. I am also a quick learner, eager to adapt to new technologies and programming paradigms.
-
-            My recent focus has been on exploring cloud architecture and implementing best practices to ensure applications are scalable and secure. I am continuously enhancing my skills in security and database optimization to build more resilient systems.
-
-            Whether collaborating within a team or working independently, I approach challenges with a positive attitude and a relentless drive to learn and improve. I am excited to connect with industry professionals and contribute to innovative projects.
+            I am a Software Engineer with experience in building applications end-to-end, including backend API development,
+            frontend implementation, and setting up cloud components such as S3-compatible storage and email services. 
+            I also work with automation tools like n8n for internal workflows and have experience integrating 
+            machine learning models into applications, including early-phase fine-tuning for client projects.
+            <br /><br />
+            I enjoy learning new technologies quickly and improving my understanding of cloud architecture, security 
+            best practices, and performance optimization. I approach engineering challenges with curiosity, ownership, 
+            and a strong desire to grow, whether working independently or collaborating within a team.
           </motion.p>
         </motion.div>
         <motion.div

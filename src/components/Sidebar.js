@@ -14,7 +14,7 @@ const Sidebar = ({ isMobile, changePages, isSidebarVisible }) => {
   return (
     <div
       className={`
-        fixed top-0 left-0 h-full bg-gray-900 text-white w-80 p-5 z-40
+        fixed top-0 left-0 h-full bg-gray-900 text-white w-80 p-3 z-40
         flex flex-col 
         items-center 
         justify-center 
