@@ -76,14 +76,13 @@ const About = () => {
             About Me
           </motion.h2>
           <motion.p className="text-justify cursor-default text-gray-600" variants={itemVariants}>
-            I am a Software Engineer with experience in building applications end-to-end, including backend API development,
-            frontend implementation, and setting up cloud components such as S3-compatible storage and email services. 
-            I also work with automation tools like n8n for internal workflows and have experience integrating 
-            machine learning models into applications, including early-phase fine-tuning for client projects.
+            I am a Software Engineer with experience in building applications end-to-end. 
+            My work covers the full development lifecycle, including backend API development, frontend implementation, and managing cloud components such as S3-compatible storage and email services. 
+            I also utilize automation tools like n8n to streamline internal workflows and have experience integrating machine learning models, including early-phase fine-tuning for client-specific projects.
             <br /><br />
-            I enjoy learning new technologies quickly and improving my understanding of cloud architecture, security 
-            best practices, and performance optimization. I approach engineering challenges with curiosity, ownership, 
-            and a strong desire to grow, whether working independently or collaborating within a team.
+            I approach engineering challenges with technical curiosity and a strong sense of ownership. 
+            Beyond writing code, I am focused on improving my understanding of cloud architecture, security best practices, and performance optimization. 
+            I enjoy the process of building scalable systems and am always looking for ways to grow, whether working independently or as part of a team.
           </motion.p>
         </motion.div>
         <motion.div
