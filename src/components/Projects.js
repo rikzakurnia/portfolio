@@ -2,106 +2,75 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import projectsData from '../data/projectsData';
-import ProjectCard from './ProjectCard';
+import { FlagshipCard, ProjectCard, ProjectRow } from './ProjectCard';
+import PageHeader, { fadeUp, stagger } from './PageHeader';
+import PageFooter from './PageFooter';
+
+const SectionTitle = ({ children, count }) => (
+  <motion.div variants={fadeUp} className="mb-6 flex items-baseline justify-between gap-4">
+    <h2 className="text-xl font-semibold tracking-tight">{children}</h2>
+    {count !== undefined && <span className="font-mono text-xs text-muted">{String(count).padStart(2, '0')}</span>}
+  </motion.div>
+);
 
 const Projects = () => {
-  // Filter project data
   const flagshipProject = projectsData.find((p) => p.isFlagship);
-  const highlightedProjects = projectsData.filter(
-    (p) => p.category === 'highlighted' && !p.isFlagship
-  );
-  const otherProjects = projectsData.filter(
-    (p) => p.category === 'other' && !p.isFlagship
-  );
-
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: 'easeOut' },
-    },
-  };
+  const highlightedProjects = projectsData.filter((p) => p.category === 'highlighted' && !p.isFlagship);
+  const otherProjects = projectsData.filter((p) => p.category === 'other' && !p.isFlagship);
 
   return (
-    <motion.div
-      className="bg-slate-50 p-8"
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-    >
-      {/* TITLE */}
-      {/* <motion.h1
-        className="mb-12 text-center text-4xl font-extrabold text-slate-900"
-        variants={itemVariants}
-      >
-        My Projects
-      </motion.h1> */}
+    <motion.div variants={stagger} initial="hidden" animate="visible">
+      <PageHeader
+        title="Things I've"
+        accent="built"
+        description="A selection of projects across backend systems, cloud deployment and full-stack products — from a personal flagship to team and course projects."
+      />
 
       {/* FLAGSHIP PROJECT */}
-      <motion.div className="mb-20" variants={itemVariants}>
-        <h2 className="mb-2 text-3xl font-bold text-slate-800  pb-2 inline-block">
-          Flagship Project
-        </h2>
-
-        <div className="mt-2">
+      <section className="mb-20">
+        <SectionTitle>Flagship project</SectionTitle>
+        <motion.div variants={fadeUp}>
           {flagshipProject ? (
-            <ProjectCard project={flagshipProject} />
+            <FlagshipCard project={flagshipProject} />
           ) : (
-            <div className="rounded-lg border-2 border-dashed border-slate-300 bg-white p-12 text-center">
-              <p className="text-slate-500">
-                🚀 A new exciting project is under construction. Coming soon!
-              </p>
+            <div className="rounded-2xl border-2 border-dashed border-line p-12 text-center text-muted">
+              A new exciting project is under construction. Coming soon!
             </div>
           )}
-        </div>
-      </motion.div>
+        </motion.div>
+      </section>
 
       {/* HIGHLIGHTED PROJECTS */}
       {highlightedProjects.length > 0 && (
-        <motion.div className="mb-20" variants={containerVariants}>
-          <motion.h2
-            className="mb-8 text-3xl font-bold text-slate-800"
-            variants={itemVariants}
-          >
-            Highlighted Projects
-          </motion.h2>
-
-          <div className="flex flex-col gap-12">
-            {highlightedProjects.map((project) => (
-              <motion.div key={project.id} variants={itemVariants}>
-                <ProjectCard project={project} />
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        <section className="mb-20">
+          <SectionTitle count={highlightedProjects.length}>Highlighted projects</SectionTitle>
+          <motion.div variants={stagger} className="grid gap-6 md:grid-cols-2">
+            {highlightedProjects.map((project, index) => {
+              // An odd last card spans the full row instead of sitting alone.
+              const wide = highlightedProjects.length % 2 === 1 && index === highlightedProjects.length - 1;
+              return (
+                <motion.div key={project.id} variants={fadeUp} className={wide ? 'md:col-span-2' : ''}>
+                  <ProjectCard project={project} wide={wide} />
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </section>
       )}
 
       {/* OTHER PROJECTS */}
       {otherProjects.length > 0 && (
-        <motion.div variants={containerVariants}>
-          <motion.h2
-            className="mb-8 text-3xl font-bold text-slate-800"
-            variants={itemVariants}
-          >
-            Other Projects
-          </motion.h2>
-
-          <div className="flex flex-col gap-10">
-            {otherProjects.map((project) => (
-              <motion.div key={project.id} variants={itemVariants}>
-                <ProjectCard project={project} />
-              </motion.div>
+        <section>
+          <SectionTitle count={otherProjects.length}>Other projects</SectionTitle>
+          <motion.div variants={fadeUp} className="card divide-y divide-line px-6">
+            {otherProjects.map((project, index) => (
+              <ProjectRow key={project.id} project={project} index={index} />
             ))}
-          </div>
-        </motion.div>
+          </motion.div>
+        </section>
       )}
+
+      <PageFooter />
     </motion.div>
   );
 };

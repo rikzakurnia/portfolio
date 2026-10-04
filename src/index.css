@@ -2,82 +2,115 @@
 @tailwind components;
 @tailwind utilities;
 
-/* src/index.css */
-.fade-enter {
-    opacity: 0;
-    transform: translateY(100%);
-}
-.fade-enter-active {
-opacity: 1;
-transform: translateY(0);
-transition: opacity 300ms, transform 300ms;
-}
-.fade-exit {
-opacity: 1;
-transform: translateY(0);
-}
-.fade-exit-active {
-opacity: 0;
-transform: translateY(-100%);
-transition: opacity 300ms, transform 300ms;
-}
-#root {
-height: 100%;
-margin: 0;
-}
-  
-/* src/index.css */
+@layer base {
+  :root {
+    --c-bg: 247 246 242;
+    --c-surface: 255 255 255;
+    --c-ink: 26 27 24;
+    --c-muted: 107 107 99;
+    --c-line: 228 225 217;
+    --c-accent: 5 150 105;
+    --c-accent-soft: 209 250 229;
 
-/* Umum untuk semua slide */
-.slide-next-enter,
-.slide-prev-enter,
-.slide-next-exit,
-.slide-prev-exit {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  /* Tambahkan properti ini untuk memastikan reset awal */
-  will-change: transform, opacity; /* Memberi tahu browser untuk mengoptimalkan animasi */
+    --c-side: 18 20 18;
+    --c-side-ink: 236 235 230;
+    --c-side-muted: 140 142 135;
+    --c-side-line: 40 43 40;
+
+    color-scheme: light;
+  }
+
+  .dark {
+    --c-bg: 14 16 15;
+    --c-surface: 22 25 23;
+    --c-ink: 236 235 230;
+    --c-muted: 154 155 146;
+    --c-line: 38 42 39;
+    --c-accent: 52 211 153;
+    --c-accent-soft: 6 78 59;
+
+    --c-side: 10 12 11;
+    --c-side-line: 32 35 33;
+
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans;
+    transition: background-color 250ms ease, color 250ms ease;
+  }
+
+  ::selection {
+    background: rgb(var(--c-accent) / 0.25);
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--c-accent));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  #root {
+    min-height: 100%;
+  }
 }
 
-/* Animasi untuk slide "next" (ke bawah dalam sidebar) */
-.slide-next-enter {
-  opacity: 0;
-  transform: translateY(100%);
-}
-.slide-next-enter-active {
-  opacity: 1;
-  transform: translateY(0%);
-  transition: opacity 300ms ease-out, transform 300ms ease-out;
-}
-.slide-next-exit {
-  opacity: 1;
-  transform: translateY(0%);
-}
-.slide-next-exit-active {
-  opacity: 0;
-  transform: translateY(-100%);
-  transition: opacity 300ms ease-out, transform 300ms ease-out;
+@layer components {
+  /* Subtle dotted backdrop for the content area */
+  .dot-grid {
+    background-image: radial-gradient(rgb(var(--c-ink) / 0.07) 1px, transparent 1px);
+    background-size: 22px 22px;
+    background-position: -11px -11px;
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-surface shadow-card;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-muted;
+  }
+
+  .tag {
+    @apply inline-flex items-center rounded-md border border-line bg-bg px-2 py-0.5 font-mono text-[11px] text-muted;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply btn bg-ink text-bg hover:bg-accent hover:text-white;
+  }
+
+  .btn-ghost {
+    @apply btn border border-line bg-surface text-ink hover:border-ink/40;
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 250ms ease;
+  }
+  .link-underline:hover,
+  .group:hover .link-underline {
+    background-size: 100% 1px;
+  }
 }
 
-/* Animasi untuk slide "prev" (ke atas dalam sidebar) */
-.slide-prev-enter {
-  opacity: 0;
-  transform: translateY(-100%);
-}
-.slide-prev-enter-active {
-  opacity: 1;
-  transform: translateY(0%);
-  transition: opacity 300ms ease-out, transform 300ms ease-out;
-}
-.slide-prev-exit {
-  opacity: 1;
-  transform: translateY(0%);
-}
-.slide-prev-exit-active {
-  opacity: 0;
-  transform: translateY(100%);
-  transition: opacity 300ms ease-out, transform 300ms ease-out;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

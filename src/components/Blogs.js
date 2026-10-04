@@ -1,114 +1,77 @@
 // src/components/Blogs.js
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FaMediumM } from 'react-icons/fa';
+import { FiArrowUpRight } from 'react-icons/fi';
 import blogData from '../data/blogData';
-import BlogCard from './BlogCard';
+import BlogCard, { FeaturedBlogCard } from './BlogCard';
+import PageHeader, { fadeUp, stagger } from './PageHeader';
+import PageFooter from './PageFooter';
+import { socialLinks } from '../config/navigation';
 
 function Blogs() {
   const highlightedArticles = blogData.filter((blog) => blog.isHighlighted);
   const regularArticles = blogData.filter((blog) => !blog.isHighlighted);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.5, ease: 'easeOut' },
-    },
-  };
-
   return (
-    <motion.div
-      className="bg-slate-50"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        {/* HEADER */}
-        {/* <motion.div className="text-left mb-20" variants={containerVariants}> */}
-          {/* <motion.h1
-            className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl"
-            variants={itemVariants}
-          >
-            My Articles
-          </motion.h1> */}
+    <motion.div variants={stagger} initial="hidden" animate="visible">
+      <PageHeader
+        title="Notes &"
+        accent="writing"
+        description="Articles about the tools and practices I've applied in real projects — testing, profiling, CI/CD and clean architecture."
+      />
 
-          {/* <motion.p
-            className="mt-2 mx-auto text-lg text-slate-600"
-            variants={itemVariants}
-          >
-            Collection of articles about the implementation of tools and concepts
-            in software development. Follow my latest posts on Medium{' '}
-            <a
-              href="https://medium.com/@rikza.kurnia"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-sky-600 hover:text-sky-500 transition-colors duration-200"
-            >
-              here
-            </a>.
-          </motion.p> */}
-        {/* </motion.div> */}
-
-        {/* HIGHLIGHTED ARTICLE SECTION */}
-        {highlightedArticles.length > 0 && (
-          <motion.div className="mb-20" variants={containerVariants}>
-            <motion.h2
-              className="text-3xl font-bold text-slate-800 mb-8 border-l-4 border-green-500 pl-4"
-              variants={itemVariants}
-            >
-              Highlighted Article
-            </motion.h2>
-
-            <div className="flex flex-col gap-12">
-              {highlightedArticles.map((blog) => (
-                <motion.div key={blog.id} variants={itemVariants}>
-                  <BlogCard
-                    imgSrc={blog.imgSrc}
-                    title={blog.title}
-                    description={blog.description}
-                    link={blog.link}
-                  />
-                </motion.div>
-              ))}
-            </div>
+      {/* HIGHLIGHTED ARTICLES */}
+      {highlightedArticles.length > 0 && (
+        <section className="mb-16">
+          <motion.h2 variants={fadeUp} className="mb-6 text-xl font-semibold tracking-tight">
+            Highlighted articles
+          </motion.h2>
+          <motion.div variants={stagger} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {highlightedArticles.map((blog) => (
+              <motion.div key={blog.id} variants={fadeUp}>
+                <FeaturedBlogCard blog={blog} />
+              </motion.div>
+            ))}
           </motion.div>
-        )}
+        </section>
+      )}
 
-        {/* REGULAR ARTICLES */}
-        {regularArticles.length > 0 && (
-          <motion.div variants={containerVariants}>
-            <motion.h2
-              className="text-3xl font-bold text-slate-800 mb-8 border-l-4 border-green-400 pl-4"
-              variants={itemVariants}
-            >
-              Other Articles
-            </motion.h2>
-
-            <div className="flex flex-col gap-10">
-              {regularArticles.map((blog) => (
-                <motion.div key={blog.id} variants={itemVariants}>
-                  <BlogCard
-                    imgSrc={blog.imgSrc}
-                    title={blog.title}
-                    description={blog.description}
-                    link={blog.link}
-                  />
-                </motion.div>
-              ))}
-            </div>
+      {/* OTHER ARTICLES */}
+      {regularArticles.length > 0 && (
+        <section>
+          <motion.h2 variants={fadeUp} className="mb-4 text-xl font-semibold tracking-tight">
+            More articles
+          </motion.h2>
+          <motion.div variants={fadeUp} className="card divide-y divide-line px-5">
+            {regularArticles.map((blog) => (
+              <BlogCard key={blog.id} blog={blog} />
+            ))}
           </motion.div>
-        )}
-      </div>
+        </section>
+      )}
+
+      {/* MEDIUM CTA */}
+      <motion.a
+        variants={fadeUp}
+        href={socialLinks.medium}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group mt-8 flex items-center justify-between gap-4 rounded-2xl border border-dashed border-line p-5 transition hover:border-accent/50 hover:bg-accent/5"
+      >
+        <div className="flex items-center gap-4">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink text-bg">
+            <FaMediumM />
+          </span>
+          <div>
+            <p className="font-medium">Follow along on Medium</p>
+            <p className="text-sm text-muted">New posts land there first.</p>
+          </div>
+        </div>
+        <FiArrowUpRight className="text-muted transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
+      </motion.a>
+
+      <PageFooter />
     </motion.div>
   );
 }
