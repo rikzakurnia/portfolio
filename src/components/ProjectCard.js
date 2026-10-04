@@ -1,78 +1,91 @@
 // src/components/ProjectCard.js
-import React from "react";
-import { FaGithub, FaYoutube } from "react-icons/fa";
+import React from 'react';
 
-const ProjectCard = ({ project }) => {
+// Split "Smart Photo Storage (In Development)" into the name and its status.
+const splitTitle = (title) => {
+  const match = title.match(/^(.*?)\s*\((.*)\)$/);
+  return match ? [match[1], match[2]] : [title, null];
+};
+
+const ProjectCard = ({ project, featured = false }) => {
+  // Only the flagship carries a status in its title, e.g. "(In Development)".
+  const [name, status] = featured ? splitTitle(project.title) : [project.title, null];
+  const primaryLink = project.demoLink || project.repoLink;
+  const hasImage = Boolean(project.image);
+
+  const image = hasImage && (
+    <a
+      href={primaryLink || undefined}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Open ${name}`}
+      className={`block overflow-hidden rounded-md border-2 border-gray-200/60 ${
+        featured ? 'mb-8' : 'self-start md:col-span-2'
+      }`}
+    >
+      <img
+        src={project.image}
+        alt={name}
+        loading="lazy"
+        className={`w-full object-cover object-top transition-transform duration-500 hover:scale-[1.03] ${
+          featured ? 'aspect-[2/1]' : 'aspect-video'
+        }`}
+      />
+    </a>
+  );
+
   return (
-    <div className="w-full flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-      
-      {/* IMAGE SECTION */}
-      {project.image && (
-        <div className="md:w-1/3 w-full h-56 md:h-auto">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      )}
-
-      {/* CONTENT SECTION */}
-      <div className="flex flex-col p-6 md:w-2/3">
-        <h3 className="text-2xl font-bold text-slate-800">{project.title}</h3>
-
-        <p className="mt-2 text-slate-600">{project.description}</p>
-
-        {/* HIGHLIGHTS */}
-        <div className="my-4">
-          <p className="font-semibold text-slate-700 mb-2">Key Features:</p>
-          <ul className="list-disc list-inside space-y-1 text-slate-600">
-            {project.highlights.map((h, i) => (
-              <li key={i}>{h}</li>
-            ))}
-          </ul>
-        </div>
-
-        {/* TECHNOLOGIES */}
-        <div className="flex flex-wrap gap-2 py-2">
-          {project.technologies.map((tech, i) => (
-            <span
-              key={i}
-              className="rounded-full bg-slate-200 px-3 py-1 text-sm font-medium text-slate-700"
-            >
-              {tech}
+    <article className={featured ? '' : `grid gap-6 ${hasImage ? 'md:grid-cols-5' : ''}`}>
+      {image}
+      <div className={hasImage && !featured ? 'md:col-span-3' : ''}>
+        {status && <p className="mb-1 text-sm font-medium text-gray-500">{status}</p>}
+        <h3 className={`font-bold tracking-tight text-gray-900 ${featured ? 'text-3xl' : 'text-2xl leading-8'}`}>
+          {name}
+        </h3>
+        <div className="mt-1 flex flex-wrap">
+          {project.technologies.map((tech) => (
+            <span key={tech} className="mr-3 text-sm font-medium uppercase text-green-600">
+              {tech.split(' ').join('-')}
             </span>
           ))}
         </div>
 
-        {/* BUTTONS */}
-        <div className="mt-auto pt-4 border-t border-slate-200">
-          <div className="flex flex-wrap gap-4">
+        <p className="mt-4 leading-7 text-gray-500">{project.description}</p>
+
+        <ul className="mt-4 list-disc space-y-1 pl-5 leading-7 text-gray-500 marker:text-gray-300">
+          {project.highlights.map((h) => (
+            <li key={h}>{h}</li>
+          ))}
+        </ul>
+
+        {(project.demoLink || project.repoLink) && (
+          <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 font-medium">
             {project.demoLink && (
               <a
                 href={project.demoLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 transition"
+                className="text-green-600 hover:text-green-700"
+                aria-label={`Watch the demo of ${name}`}
               >
-                <FaYoutube className="mr-2" /> View Demo
+                Watch demo &rarr;
               </a>
             )}
-
             {project.repoLink && (
               <a
                 href={project.repoLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center rounded-md bg-slate-600 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700 transition"
+                className="text-green-600 hover:text-green-700"
+                aria-label={`Source code of ${name}`}
               >
-                <FaGithub className="mr-2" /> Repository
+                Source code &rarr;
               </a>
             )}
           </div>
-        </div>
+        )}
       </div>
-    </div>
+    </article>
   );
 };
 

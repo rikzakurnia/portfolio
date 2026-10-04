@@ -1,79 +1,103 @@
 // src/components/Sidebar.js
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { FaGithub, FaLinkedin, FaMedium, FaInstagram } from 'react-icons/fa';
+import navItems, { socialLinks } from '../config/navigation';
 
-const Sidebar = ({ isMobile, changePages, isSidebarVisible }) => {
-  const navItems = [
-    { name: 'About Me', path: '/about' },
-    { name: 'Projects', path: '/projects' },
-    { name: 'Skills', path: '/skills' },
-    { name: 'Blogs', path: '/blogs' },
-    { name: 'Experience', path: '/experience' },
-  ];
+const socialIcons = {
+  GitHub: FaGithub,
+  LinkedIn: FaLinkedin,
+  Medium: FaMedium,
+  Instagram: FaInstagram,
+};
+
+const Sidebar = ({ isMobile, isSidebarVisible, closeSidebar }) => {
+  const hidden = isMobile && !isSidebarVisible;
 
   return (
-    <div
+    <aside
       className={`
-        fixed top-0 left-0 h-full bg-gray-900 text-white w-80 p-3 z-40
-        flex flex-col 
-        items-center 
-        justify-center 
-        transition-transform duration-300
-        ${isMobile && !isSidebarVisible ? '-translate-x-full' : 'translate-x-0'}
-        md:translate-x-0
+        fixed inset-y-0 left-0 z-50 flex w-80 flex-col justify-between overflow-y-auto
+        bg-gray-900 px-10 py-16 text-white
+        transition-[transform,visibility] duration-300
+        ${hidden ? 'invisible -translate-x-full' : 'visible translate-x-0'}
       `}
     >
-      {/* Tombol Close (hanya di mobile) */}
       {isMobile && (
         <button
-          onClick={changePages}
-          className="absolute top-4 right-4 text-white p-2 z-50 focus:outline-none" 
+          onClick={closeSidebar}
+          className="absolute right-4 top-4 p-2 text-gray-400 hover:text-white"
+          aria-label="Close menu"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2.5} 
-            stroke="currentColor" 
-            className="w-7 h-7 stroke-white" 
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       )}
 
-      {/* Konten Sidebar */}
-      <div className="flex flex-col items-center text-center w-full">
-        <h1 className="text-2xl font-bold mb-8">Rikza's Portfolio</h1>
+      <div>
+        <NavLink to="/about" onClick={isMobile ? closeSidebar : undefined}>
+          <h1 className="text-3xl font-bold tracking-tight">Rikza Kurnia</h1>
+        </NavLink>
+        <p className="mt-2 text-lg font-medium text-gray-200">Software Engineer</p>
+        <p className="mt-4 max-w-[15rem] leading-normal text-gray-400">
+          I build web applications end-to-end, from backend APIs to the cloud they run on.
+        </p>
 
-        <nav className="w-full"> 
-          <ul className="space-y-4"> 
+        <nav className="mt-14" aria-label="Pages">
+          <ul>
             {navItems.map((item) => (
-              <li key={item.name}>
+              <li key={item.path}>
                 <NavLink
                   to={item.path}
-                  className={({ isActive }) =>
-                    `
-                      block text-lg py-2 px-4 rounded-md // Tambah padding pada link itu sendiri
-                      hover:text-blue-400 hover:bg-gray-800 // Hover background
-                      transition-colors duration-200
-                      ${isActive ? 'text-blue-400 font-bold bg-gray-800' : ''}
-                    `
-                  }
-                  onClick={isMobile ? changePages : undefined}
+                  onClick={isMobile ? closeSidebar : undefined}
+                  className="group flex items-center py-3"
                 >
-                  {item.name}
+                  {({ isActive }) => (
+                    <>
+                      <span
+                        className={`mr-4 h-px transition-all duration-200 ${
+                          isActive
+                            ? 'w-16 bg-blue-400'
+                            : 'w-8 bg-gray-600 group-hover:w-16 group-hover:bg-gray-200'
+                        }`}
+                      />
+                      <span
+                        className={`text-xs font-bold uppercase tracking-widest transition-colors ${
+                          isActive ? 'text-blue-400' : 'text-gray-500 group-hover:text-gray-200'
+                        }`}
+                      >
+                        {item.label}
+                      </span>
+                    </>
+                  )}
                 </NavLink>
               </li>
             ))}
           </ul>
         </nav>
       </div>
-    </div>
+
+      <ul className="mt-12 flex items-center gap-5" aria-label="Social media">
+        {socialLinks.map(({ label, href }) => {
+          const Icon = socialIcons[label];
+          return (
+            <li key={label}>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                title={label}
+                className="block text-gray-400 transition-colors hover:text-white"
+              >
+                <Icon size={22} />
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </aside>
   );
 };
 

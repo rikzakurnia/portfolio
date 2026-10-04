@@ -1,53 +1,42 @@
+// src/components/BlogCard.js
 import React from 'react';
 
 function BlogCard({ imgSrc, title, description, link }) {
   return (
-    <a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group block w-full"
-    >
-      <div className="
-        flex flex-col md:flex-row 
-        bg-white rounded-xl shadow-lg 
-        overflow-hidden transition-all duration-300 
-        hover:shadow-2xl hover:-translate-y-1
-      ">
-        
-        {/* IMAGE */}
-        <div className="md:w-1/3 w-full h-56 md:h-auto overflow-hidden">
-          <img
-            src={imgSrc}
-            alt={`Thumbnail for ${title}`}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-        </div>
-
-        {/* TEXT CONTENT */}
-        <div className="md:w-2/3 w-full p-6 flex flex-col">
-          <h3 className="text-2xl font-bold text-slate-800 mb-2">
+    <article className="grid gap-5 sm:grid-cols-3 sm:gap-8">
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        tabIndex={-1}
+        aria-hidden="true"
+        className="block self-start overflow-hidden rounded-md border-2 border-gray-200/60"
+      >
+        <img
+          src={imgSrc}
+          alt=""
+          loading="lazy"
+          className="aspect-video w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
+        />
+      </a>
+      <div className="sm:col-span-2">
+        <h3 className="text-xl font-bold leading-7 tracking-tight">
+          <a href={link} target="_blank" rel="noopener noreferrer" className="text-gray-900 hover:text-green-700">
             {title}
-          </h3>
-
-          <p className="text-slate-600 leading-relaxed mb-4">
-            {description}
-          </p>
-
-          <div className="mt-auto">
-            <span className="
-              inline-block rounded-full bg-gray-900 
-              px-5 py-2 text-sm font-semibold text-white 
-              transition-all duration-300 
-              group-hover:bg-sky-600
-            ">
-              Read Article
-            </span>
-          </div>
-        </div>
-
+          </a>
+        </h3>
+        <p className="mt-2 leading-7 text-gray-500">{description}</p>
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-block font-medium text-green-600 hover:text-green-700"
+          aria-label={`Read "${title}" on Medium`}
+        >
+          Read article &rarr;
+        </a>
       </div>
-    </a>
+    </article>
   );
 }
 

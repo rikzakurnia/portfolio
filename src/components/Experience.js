@@ -1,81 +1,34 @@
 // src/components/Experience.js
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import ExperienceCard from './ExperienceCard';
+import PageHeader from './PageHeader';
+import PageFooter from './PageFooter';
+import SectionHeading from './SectionHeading';
 import { workExperiences, programExperiences } from '../data/experienceData';
 
-const Experience = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 }
-    }
-  };
+const ExperienceList = ({ items }) => (
+  <ul className="divide-y divide-gray-200">
+    {items.map((exp) => (
+      <li key={exp.id} className="py-10">
+        <ExperienceCard experience={exp} />
+      </li>
+    ))}
+  </ul>
+);
 
-  const itemVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.5, ease: 'easeOut' }
-    }
-  };
+const Experience = () => (
+  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+    <PageHeader title="Experience">Where I have worked and the programs I have taken part in.</PageHeader>
 
-  return (
-    <motion.div
-      className="p-8"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      <motion.h1
-        className="text-3xl font-bold mb-8 text-center md:text-left"
-        variants={itemVariants}
-      >
-        Experience
-      </motion.h1>
+    <SectionHeading>Work Experience</SectionHeading>
+    <ExperienceList items={workExperiences} />
 
-      {/* WORK EXPERIENCE */}
-      <motion.h2
-        className="text-2xl font-semibold mb-6 mt-4"
-        variants={itemVariants}
-      >
-        Work Experience
-      </motion.h2>
+    <SectionHeading>Programs &amp; Training</SectionHeading>
+    <ExperienceList items={programExperiences} />
 
-      <div>
-        {workExperiences.map((exp, index) => (
-          <motion.div key={exp.id} variants={itemVariants}>
-            <ExperienceCard
-              experience={exp}
-              isLast={index === workExperiences.length - 1}
-            />
-          </motion.div>
-        ))}
-      </div>
-
-      {/* PROGRAMS & TRAINING */}
-      <motion.h2
-        className="text-2xl font-semibold mb-6 mt-12"
-        variants={itemVariants}
-      >
-        Programs & Training
-      </motion.h2>
-
-      <div>
-        {programExperiences.map((exp, index) => (
-          <motion.div key={exp.id} variants={itemVariants}>
-            <ExperienceCard
-              experience={exp}
-              isLast={index === programExperiences.length - 1}
-            />
-          </motion.div>
-        ))}
-      </div>
-    </motion.div>
-  );
-};
+    <PageFooter />
+  </motion.div>
+);
 
 export default Experience;

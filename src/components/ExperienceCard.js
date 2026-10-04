@@ -1,33 +1,24 @@
 // src/components/ExperienceCard.js
 import React from 'react';
 
-const ExperienceCard = ({ experience, isLast }) => {
-  return (
-    <div className="relative flex items-start">
-
-      <div className="flex flex-col items-center mr-6">
-
-        <div className="flex-shrink-0 bg-white rounded-full shadow-md w-16 h-16 flex items-center justify-center">
-          <img
-            src={experience.companyLogo}
-            alt={`${experience.company} logo`}
-            className="w-14 h-14 object-contain rounded-full"
-          />
+const ExperienceCard = ({ experience }) => (
+  <article className="grid gap-3 md:grid-cols-4 md:gap-8">
+    <p className="font-medium leading-7 text-gray-500 md:pt-1">{experience.duration}</p>
+    <div className="md:col-span-3">
+      <div className="flex items-center gap-4">
+        <img
+          src={experience.companyLogo}
+          alt={`${experience.company} logo`}
+          className="h-12 w-12 shrink-0 rounded-full border border-gray-200 bg-white object-contain p-0.5"
+        />
+        <div>
+          <h3 className="text-xl font-bold leading-7 tracking-tight text-gray-900">{experience.jobTitle}</h3>
+          <p className="font-medium text-gray-600">{experience.company}</p>
         </div>
-
-        {!isLast && <div className="w-px h-full bg-slate-300 mt-2"></div>}
       </div>
-
-      <div className="bg-white p-6 rounded-lg shadow-md w-full mb-8">
-        <h3 className="text-xl font-bold text-slate-800">{experience.jobTitle}</h3>
-        <p className="text-md text-slate-600 font-semibold">{experience.company}</p>
-        <p className="text-sm text-slate-500 mb-4">{experience.duration}</p>
-        <p className="text-slate-700 text-base text-justify">
-          {experience.description}
-        </p>
-      </div>
+      <p className="mt-4 leading-7 text-gray-500">{experience.description}</p>
     </div>
-  );
-};
+  </article>
+);
 
 export default ExperienceCard;

@@ -33,7 +33,7 @@ const blogData = [
         isHighlighted: false,
     },
     {
-        id: 4,
+        id: 5,
         imgSrc: "https://storage.googleapis.com/bucket-for-ppl-rikza/sonarqube.png",
         title: "SonarQube : Static Code Analysis Tools",
         description: "Setting up the my gitlab repository for SonarQube analaysis to identify code smell and security issue",
@@ -41,7 +41,7 @@ const blogData = [
         isHighlighted: false,
     },
     {
-        id: 5,
+        id: 6,
         imgSrc: "https://storage.googleapis.com/bucket-for-ppl-rikza/jmeter.png",
         title: "Stress Test Using JMeter On Django Application",
         description: "This article describe about how i use JMeter to do stress testing on my group project",
@@ -49,7 +49,7 @@ const blogData = [
         isHighlighted: false,
     },
     {
-      id: 6,
+      id: 7,
       imgSrc: "https://storage.googleapis.com/bucket-for-ppl-rikza/template-method.png",
       title: "Implementing SRP and OCP by Using Template Pattern on Django",
       description: "How i apply SOLID principle especially SRP and OCP by using template pattern on my django project",

@@ -9,124 +9,118 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Blogs from './components/Blogs';
 import Experience from './components/Experience';
+import navItems, { normalizePath } from './config/navigation';
 
 import './index.css';
 
-const routeConfig = [
-  { path: '/', name: 'About', component: About }, // rute default
-  { path: '/about', name: 'About', component: About },
-  { path: '/projects', name: 'Projects', component: Projects },
-  { path: '/skills', name: 'Skills', component: Skills },
-  { path: '/blogs', name: 'Blogs', component: Blogs },
-  { path: '/experience', name: 'Experience', component: Experience },
-];
+const pageComponents = {
+  '/about': About,
+  '/projects': Projects,
+  '/skills': Skills,
+  '/blogs': Blogs,
+  '/experience': Experience,
+};
 
 const pageVariants = {
-  initial: (direction) => ({
-    opacity: 0,
-    y: direction === 'next' ? '100%' : '-100%',
-  }),
-  in: {
-    opacity: 1,
-    y: 0,
-  },
-  out: (direction) => ({
-    opacity: 0,
-    y: direction === 'next' ? '-100%' : '100%',
-  }),
+  initial: (direction) => ({ opacity: 0, y: direction === 'next' ? 16 : -16 }),
+  in: { opacity: 1, y: 0 },
+  out: (direction) => ({ opacity: 0, y: direction === 'next' ? -16 : 16 }),
 };
 
-const pageTransition = {
-  type: "tween",
-  ease: "easeOut",
-  duration: 0.14,
-};
+const pageTransition = { duration: 0.2, ease: 'easeOut' };
+
+const indexOf = (path) => navItems.findIndex((item) => item.path === path);
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
   const [isSidebarVisible, setSidebarVisible] = useState(false);
-  const [transitionDirection, setTransitionDirection] = useState('next');
   const location = useLocation();
 
-  const prevNormalizedPath = useRef(location.pathname === '/' ? '/about' : location.pathname);
+  const currentPath = normalizePath(location.pathname);
+  const prevPath = useRef(currentPath);
+  const direction = useRef('next');
 
+  // Pages further down the sidebar slide up, earlier ones slide down.
+  if (prevPath.current !== currentPath) {
+    direction.current = indexOf(currentPath) >= indexOf(prevPath.current) ? 'next' : 'prev';
+    prevPath.current = currentPath;
+  }
 
   useEffect(() => {
-    const handleResize = () => {
-      const isMobile = window.matchMedia('(max-width: 767px)').matches;
-      setIsMobile(isMobile);
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize();
-
-    return () => window.removeEventListener('resize', handleResize);
+    const query = window.matchMedia('(max-width: 767px)');
+    const handleChange = () => setIsMobile(query.matches);
+    handleChange();
+    query.addEventListener('change', handleChange);
+    return () => query.removeEventListener('change', handleChange);
   }, []);
 
   useEffect(() => {
-    const normalizePath = (path) => (path === '/' ? '/about' : path);
+    const page = navItems[indexOf(currentPath)];
+    document.title = page ? `${page.label} | Rikza Kurnia` : "Rikza's Portfolio";
+  }, [currentPath]);
 
-    const currentPath = normalizePath(location.pathname);
-    const previousPath = prevNormalizedPath.current; 
+  useEffect(() => {
+    document.body.style.overflow = isMobile && isSidebarVisible ? 'hidden' : '';
+  }, [isMobile, isSidebarVisible]);
 
-    const currentPathIndex = routeConfig.findIndex(r => r.path === currentPath);
-    const prevPathIndex = routeConfig.findIndex(r => r.path === previousPath);
-
-    let newDirection = 'next';
-
-    if (currentPathIndex !== -1 && prevPathIndex !== -1) {
-      if (currentPathIndex > prevPathIndex) {
-        newDirection = 'next'; 
-      } else if (currentPathIndex < prevPathIndex) {
-        newDirection = 'prev'; 
-      } else {
-
-        newDirection = transitionDirection; 
-      }
-    }
-
-    setTransitionDirection(newDirection);
-
-    prevNormalizedPath.current = currentPath;
-
-
-  }, [location.pathname, location.key, transitionDirection]); 
-
-  function toggleSidebar() {
-    setSidebarVisible(!isSidebarVisible);
-  }
-
-  const CurrentPage = routeConfig.find(r => r.path === location.pathname)?.component || About;
+  const CurrentPage = pageComponents[currentPath] || About;
 
   return (
-    <div className="flex flex-column min-h-screen">
+    <div className="min-h-screen">
       <Sidebar
         isMobile={isMobile}
-        changePages={toggleSidebar}
         isSidebarVisible={isSidebarVisible}
+        closeSidebar={() => setSidebarVisible(false)}
       />
-      <div className="flex-grow overflow-hidden p-4 md:ml-80 relative">
-        <AnimatePresence mode='wait' initial={true}>
+
+      {/* Mobile header */}
+      <header className="sticky top-0 z-30 flex items-center justify-between bg-gray-900 px-5 py-4 text-white md:hidden">
+        <span className="font-bold tracking-tight">Rikza Kurnia</span>
+        <button
+          onClick={() => setSidebarVisible(true)}
+          className="-mr-2 p-2 text-gray-300 hover:text-white"
+          aria-label="Open menu"
+          aria-expanded={isSidebarVisible}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </header>
+
+      <AnimatePresence>
+        {isMobile && isSidebarVisible && (
           <motion.div
-            key={location.key} 
-            custom={transitionDirection} 
+            className="fixed inset-0 z-40 bg-gray-900/60"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSidebarVisible(false)}
+          />
+        )}
+      </AnimatePresence>
+
+      <main className="md:ml-80">
+        <AnimatePresence
+          mode="wait"
+          initial={false}
+          custom={direction.current}
+          onExitComplete={() => window.scrollTo({ top: 0 })}
+        >
+          <motion.div
+            key={currentPath}
+            custom={direction.current}
             variants={pageVariants}
             initial="initial"
             animate="in"
             exit="out"
             transition={pageTransition}
-            className="absolute top-0 left-0 w-full h-full overflow-y-auto"
+            className="mx-auto max-w-4xl px-6 py-12 sm:px-10 md:py-16 lg:px-16"
           >
             <CurrentPage />
           </motion.div>
         </AnimatePresence>
-      </div>
-      <button
-        className="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg z-50 md:hidden"
-        onClick={toggleSidebar}
-      >
-        {isSidebarVisible ? 'Hide' : 'Show'} Sidebar
-      </button>
+      </main>
     </div>
   );
 }
