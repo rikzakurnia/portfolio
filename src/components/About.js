@@ -2,177 +2,117 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedinIn, FaInstagram, FaMediumM, FaGraduationCap } from 'react-icons/fa';
-import { FiArrowRight, FiArrowUpRight } from 'react-icons/fi';
-import { PROFILE_PICTURE } from './Sidebar';
+import { FaGithub, FaLinkedin, FaMedium, FaInstagram } from 'react-icons/fa';
 import PageFooter from './PageFooter';
-import { fadeUp, stagger } from './PageHeader';
 import { socialLinks } from '../config/navigation';
+import { workExperiences } from '../data/experienceData';
 import projectsData from '../data/projectsData';
 
-const highlights = [
-  { label: 'Currently', value: 'Software Engineer', sub: 'Aether AI · Remote' },
-  { label: 'Certified', value: 'GCP Associate', sub: 'Cloud Engineer' },
-  { label: 'Bangkit Academy', value: 'Top 10%', sub: 'Cloud Computing cohort' },
-];
+const socialIcons = {
+  GitHub: FaGithub,
+  LinkedIn: FaLinkedin,
+  Medium: FaMedium,
+  Instagram: FaInstagram,
+};
 
-const focusAreas = ['Backend APIs', 'Frontend', 'Cloud & DevOps', 'Automation (n8n)', 'ML integration'];
-
-const socials = [
-  { label: 'LinkedIn', href: socialLinks.linkedin, icon: FaLinkedinIn },
-  { label: 'GitHub', href: socialLinks.github, icon: FaGithub },
-  { label: 'Medium', href: socialLinks.medium, icon: FaMediumM },
-  { label: 'Instagram', href: socialLinks.instagram, icon: FaInstagram },
-];
+const Section = ({ title, children }) => (
+  <section className="grid gap-4 border-t border-gray-200 py-10 md:grid-cols-4 md:gap-8">
+    <h2 className="text-sm font-bold uppercase tracking-wider text-green-600">{title}</h2>
+    <div className="md:col-span-3">{children}</div>
+  </section>
+);
 
 const About = () => {
+  const currentJob = workExperiences[0];
   const flagship = projectsData.find((p) => p.isFlagship);
 
   return (
-    <motion.div variants={stagger} initial="hidden" animate="visible">
-      {/* HERO */}
-      <section className="grid items-center gap-10 md:grid-cols-[1fr_auto] md:gap-14">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+      <section className="flex flex-col-reverse items-start gap-8 pb-12 md:flex-row md:items-center md:justify-between">
         <div>
-          <motion.p variants={fadeUp} className="eyebrow mb-5 flex items-center gap-3">
-            <span className="text-accent">01</span>
-            <span className="h-px w-8 bg-line" />
-            Hello, my name is
-          </motion.p>
-
-          <motion.h1
-            variants={fadeUp}
-            className="text-[2.6rem] font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
-          >
-            Rikza Kurnia
-            <br />
-            <span className="font-serif text-[1.12em] font-normal italic text-accent">Almujtaba Lubis</span>
-          </motion.h1>
-
-          <motion.p variants={fadeUp} className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-            A software engineer who builds applications <span className="text-ink">end-to-end</span> — from
-            backend APIs and interfaces to the cloud pieces that keep them running.
-          </motion.p>
-
-          <motion.div variants={fadeUp} className="mt-5 flex items-center gap-2 text-sm text-muted">
-            <FaGraduationCap size={15} />
-            Computer Science Graduate
-          </motion.div>
-
-          <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center gap-3">
-            <Link to="/projects" className="btn-primary group">
-              See my work
-              <FiArrowRight className="transition group-hover:translate-x-0.5" />
-            </Link>
-            <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="btn-ghost">
-              Let's connect
-            </a>
-          </motion.div>
+          <p className="font-semibold text-green-600">Hello everyone, my name is</p>
+          <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl md:leading-tight">
+            Rikza Kurnia Almujtaba Lubis
+          </h1>
+          <p className="mt-3 text-xl text-gray-600">Software Engineer · Computer Science Graduate</p>
         </div>
-
-        {/* Portrait */}
-        <motion.div variants={fadeUp} className="relative mx-auto w-56 sm:w-64 md:w-72">
-          <div aria-hidden className="absolute inset-0 translate-x-3 translate-y-3 rounded-[2rem] border border-accent/40" />
-          <div aria-hidden className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-accent/20 blur-2xl" />
-          <img
-            src={PROFILE_PICTURE}
-            alt="Portrait of Rikza Kurnia Almujtaba Lubis"
-            className="relative aspect-[4/5] w-full rounded-[2rem] object-cover shadow-lift"
-          />
-          <div className="absolute -bottom-4 -left-4 flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-medium shadow-card">
-            <span className="h-2 w-2 rounded-full bg-accent" />
-            Based in Indonesia
-          </div>
-        </motion.div>
+        <img
+          src="https://storage.googleapis.com/bucket-for-ppl-rikza/Rikza-Profile-Pict.jpg"
+          alt="Rikza Kurnia Almujtaba Lubis"
+          className="h-32 w-32 shrink-0 rounded-full object-cover ring-4 ring-gray-100 md:h-44 md:w-44"
+        />
       </section>
 
-      {/* QUICK FACTS */}
-      <motion.section variants={fadeUp} className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
-        {highlights.map((h) => (
-          <div key={h.label} className="bg-surface p-5">
-            <p className="eyebrow">{h.label}</p>
-            <p className="mt-2 text-xl font-semibold tracking-tight">{h.value}</p>
-            <p className="text-sm text-muted">{h.sub}</p>
-          </div>
-        ))}
-      </motion.section>
+      <Section title="About Me">
+        <div className="space-y-5 leading-7 text-gray-600">
+          <p>
+            I am a Software Engineer with experience in building applications end-to-end. My work covers the full
+            development lifecycle, including backend API development, frontend implementation, and managing cloud
+            components such as S3-compatible storage and email services. I also utilize automation tools like n8n to
+            streamline internal workflows and have experience integrating machine learning models, including
+            early-phase fine-tuning for client-specific projects.
+          </p>
+          <p>
+            I approach engineering challenges with technical curiosity and a strong sense of ownership. Beyond writing
+            code, I am focused on improving my understanding of cloud architecture, security best practices, and
+            performance optimization. I enjoy the process of building scalable systems and am always looking for ways
+            to grow, whether working independently or as part of a team.
+          </p>
+        </div>
+      </Section>
 
-      {/* ABOUT + SIDE COLUMN */}
-      <section className="mt-16 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
-        <motion.div variants={fadeUp}>
-          <h2 className="eyebrow mb-4">About me</h2>
-          <div className="space-y-4 text-[1.05rem] leading-relaxed text-muted">
-            <p>
-              I am a Software Engineer with experience in building applications end-to-end. My work covers the full
-              development lifecycle, including <span className="text-ink">backend API development</span>,{' '}
-              <span className="text-ink">frontend implementation</span>, and managing cloud components such as
-              S3-compatible storage and email services. I also utilize automation tools like n8n to streamline
-              internal workflows and have experience integrating machine learning models, including early-phase
-              fine-tuning for client-specific projects.
-            </p>
-            <p>
-              I approach engineering challenges with technical curiosity and a strong sense of ownership. Beyond
-              writing code, I am focused on improving my understanding of{' '}
-              <span className="text-ink">cloud architecture, security best practices, and performance
-              optimization</span>. I enjoy the process of building scalable systems and am always looking for ways
-              to grow, whether working independently or as part of a team.
-            </p>
-          </div>
-
-          <div className="mt-6 flex flex-wrap gap-2">
-            {focusAreas.map((f) => (
-              <span key={f} className="tag">{f}</span>
-            ))}
-          </div>
-        </motion.div>
-
-        <motion.div variants={fadeUp} className="space-y-4">
-          {flagship && (
-            <Link
-              to="/projects"
-              className="group card block overflow-hidden transition hover:-translate-y-0.5 hover:shadow-lift"
-            >
-              {flagship.image && (
-                <div className="aspect-[16/9] overflow-hidden border-b border-line">
-                  <img
-                    src={flagship.image}
-                    alt=""
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                  />
-                </div>
-              )}
-              <div className="p-5">
-                <p className="eyebrow flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-                  Currently building
-                </p>
-                <p className="mt-2 flex items-center justify-between gap-2 font-semibold">
-                  {flagship.title.replace(/\s*\(.*\)$/, '')}
-                  <FiArrowUpRight className="shrink-0 text-muted transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
-                </p>
-                <p className="mt-1 line-clamp-2 text-sm text-muted">{flagship.description}</p>
-              </div>
-            </Link>
+      <Section title="Now">
+        <dl className="space-y-4 text-gray-600">
+          {currentJob && (
+            <div className="sm:flex sm:gap-6">
+              <dt className="w-32 shrink-0 font-medium text-gray-900">Working</dt>
+              <dd>
+                {currentJob.jobTitle} at{' '}
+                <Link to="/experience" className="font-medium text-green-600 hover:text-green-700">
+                  {currentJob.company}
+                </Link>{' '}
+                <span className="text-gray-400">({currentJob.duration})</span>
+              </dd>
+            </div>
           )}
+          {flagship && (
+            <div className="sm:flex sm:gap-6">
+              <dt className="w-32 shrink-0 font-medium text-gray-900">Building</dt>
+              <dd>
+                <Link to="/projects" className="font-medium text-green-600 hover:text-green-700">
+                  {flagship.title.replace(/\s*\(.*\)$/, '')}
+                </Link>
+                , a photo library you can search with natural language
+              </dd>
+            </div>
+          )}
+          <div className="sm:flex sm:gap-6">
+            <dt className="w-32 shrink-0 font-medium text-gray-900">Learning</dt>
+            <dd>Cloud architecture, security best practices and performance optimization</dd>
+          </div>
+        </dl>
+      </Section>
 
-          <div className="card p-5">
-            <p className="eyebrow mb-3">Let's connect</p>
-            <div className="grid grid-cols-2 gap-2">
-              {socials.map(({ label, href, icon: Icon }) => (
+      <Section title="Let's connect">
+        <ul className="flex flex-wrap gap-x-8 gap-y-3">
+          {socialLinks.map(({ label, href }) => {
+            const Icon = socialIcons[label];
+            return (
+              <li key={label}>
                 <a
-                  key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 rounded-xl border border-line px-3 py-2.5 text-sm font-medium transition hover:border-accent/50 hover:bg-accent/5"
+                  className="inline-flex items-center gap-2 font-medium text-gray-700 hover:text-green-600"
                 >
-                  <Icon className="text-muted transition group-hover:text-accent" />
+                  <Icon size={18} className="text-gray-400" />
                   {label}
                 </a>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      </section>
+              </li>
+            );
+          })}
+        </ul>
+      </Section>
 
       <PageFooter />
     </motion.div>

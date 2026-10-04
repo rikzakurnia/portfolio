@@ -3,106 +3,21 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --c-bg: 247 246 242;
-    --c-surface: 255 255 255;
-    --c-ink: 26 27 24;
-    --c-muted: 107 107 99;
-    --c-line: 228 225 217;
-    --c-accent: 5 150 105;
-    --c-accent-soft: 209 250 229;
-
-    --c-side: 18 20 18;
-    --c-side-ink: 236 235 230;
-    --c-side-muted: 140 142 135;
-    --c-side-line: 40 43 40;
-
-    color-scheme: light;
-  }
-
-  .dark {
-    --c-bg: 14 16 15;
-    --c-surface: 22 25 23;
-    --c-ink: 236 235 230;
-    --c-muted: 154 155 146;
-    --c-line: 38 42 39;
-    --c-accent: 52 211 153;
-    --c-accent-soft: 6 78 59;
-
-    --c-side: 10 12 11;
-    --c-side-line: 32 35 33;
-
-    color-scheme: dark;
-  }
-
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
   }
 
   body {
-    @apply bg-bg text-ink font-sans;
-    transition: background-color 250ms ease, color 250ms ease;
+    @apply bg-white text-gray-900;
   }
 
   ::selection {
-    background: rgb(var(--c-accent) / 0.25);
-  }
-
-  :focus-visible {
-    outline: 2px solid rgb(var(--c-accent));
-    outline-offset: 3px;
-    border-radius: 6px;
+    @apply bg-green-100 text-green-900;
   }
 
   #root {
     min-height: 100%;
-  }
-}
-
-@layer components {
-  /* Subtle dotted backdrop for the content area */
-  .dot-grid {
-    background-image: radial-gradient(rgb(var(--c-ink) / 0.07) 1px, transparent 1px);
-    background-size: 22px 22px;
-    background-position: -11px -11px;
-  }
-
-  .card {
-    @apply rounded-2xl border border-line bg-surface shadow-card;
-  }
-
-  .eyebrow {
-    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-muted;
-  }
-
-  .tag {
-    @apply inline-flex items-center rounded-md border border-line bg-bg px-2 py-0.5 font-mono text-[11px] text-muted;
-  }
-
-  .btn {
-    @apply inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200;
-  }
-
-  .btn-primary {
-    @apply btn bg-ink text-bg hover:bg-accent hover:text-white;
-  }
-
-  .btn-ghost {
-    @apply btn border border-line bg-surface text-ink hover:border-ink/40;
-  }
-
-  .link-underline {
-    background-image: linear-gradient(currentColor, currentColor);
-    background-size: 0% 1px;
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    transition: background-size 250ms ease;
-  }
-  .link-underline:hover,
-  .group:hover .link-underline {
-    background-size: 100% 1px;
   }
 }
 

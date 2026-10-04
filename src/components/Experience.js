@@ -1,40 +1,31 @@
 // src/components/Experience.js
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiBriefcase, FiAward } from 'react-icons/fi';
 import ExperienceCard from './ExperienceCard';
-import PageHeader, { fadeUp, stagger } from './PageHeader';
+import PageHeader from './PageHeader';
 import PageFooter from './PageFooter';
+import SectionHeading from './SectionHeading';
 import { workExperiences, programExperiences } from '../data/experienceData';
 
-const Timeline = ({ title, icon: Icon, items }) => (
-  <section className="mb-10">
-    <motion.div variants={fadeUp} className="mb-6 flex items-center gap-3">
-      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent/10 text-accent">
-        <Icon size={17} />
-      </span>
-      <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
-    </motion.div>
-    <motion.div variants={stagger}>
-      {items.map((exp, index) => (
-        <motion.div key={exp.id} variants={fadeUp}>
-          <ExperienceCard experience={exp} isLast={index === items.length - 1} />
-        </motion.div>
-      ))}
-    </motion.div>
-  </section>
+const ExperienceList = ({ items }) => (
+  <ul className="divide-y divide-gray-200">
+    {items.map((exp) => (
+      <li key={exp.id} className="py-10">
+        <ExperienceCard experience={exp} />
+      </li>
+    ))}
+  </ul>
 );
 
 const Experience = () => (
-  <motion.div variants={stagger} initial="hidden" animate="visible">
-    <PageHeader
-      title="Where I've"
-      accent="worked"
-      description="Professional roles and programs that shaped how I build and ship software."
-    />
+  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+    <PageHeader title="Experience">Where I have worked and the programs I have taken part in.</PageHeader>
 
-    <Timeline title="Work experience" icon={FiBriefcase} items={workExperiences} />
-    <Timeline title="Programs & training" icon={FiAward} items={programExperiences} />
+    <SectionHeading>Work Experience</SectionHeading>
+    <ExperienceList items={workExperiences} />
+
+    <SectionHeading>Programs &amp; Training</SectionHeading>
+    <ExperienceList items={programExperiences} />
 
     <PageFooter />
   </motion.div>
